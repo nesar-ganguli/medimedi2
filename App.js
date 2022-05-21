@@ -12,6 +12,10 @@ import MerchantLogin from './Screen/MerchantLogin';
 import MerchantSignup from './Screen/MerchantSignup';
 import MerchantLanding from './Screen/MerchantLanding';
 import MerchantDashboard from './Screen/MerchantDashboard';
+import WishlistScreen from './Screen/WishlistScreen';
+import ProfileScreen from './Screen/ProfileScreen';
+import CategoryScreen from './Screen/CategoryScreen';
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -28,6 +32,10 @@ export default function App() {
         <Stack.Screen name="MerchantLanding" component={MerchantLanding} options={{headerShown:false}} />
         <Stack.Screen name="MerchantSignup" component={MerchantSignup} options={{headerShown:false}} />
         <Stack.Screen name="MerchantDashboard" component={MerchantDashboard} options={{headerShown:false}} />
+        <Stack.Screen name="WishlistScreen" component={WishlistScreen} options={{headerShown:false}} />
+        <Stack.Screen name="ProfileScreen" component={ProfileScreen} options={{headerShown:false}} />
+        <Stack.Screen name="CategoryScreen" component={CategoryScreen} options={{headerShown:false}} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

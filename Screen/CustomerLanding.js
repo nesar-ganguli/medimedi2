@@ -25,8 +25,10 @@ export default CustomerLanding = ({navigation}) =>  {
                         <Text style={{fontSize:19, color:'#FFFFFF'}}>SignUp</Text>
                     </View>
              </TouchableOpacity>
+             <TouchableOpacity onPress={() => navigation.navigate('MerchantLogin')}>
                 < Text style={{fontSize:18, top:height/2, left:width/3.5,}}>Are you a seller? </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('MerchantLanding')}>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('MerchantSignup')}>
                   <Text style={{fontSize:18, top:height/2, left:width/3.5, padding:15}}>Register Now</Text>
                 </TouchableOpacity>
             </SafeAreaView>

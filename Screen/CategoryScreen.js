@@ -26,58 +26,24 @@ export default HomeScreen = ({navigation}) =>  {
     return (
         <SafeAreaView>
         <View style={{flexDirection: "column"}}>
-            <View style={styles.Header}>
-                <LinearGradient colors={['#00747BCF', '#fff' ]} style={styles.linearGradient}>
-                <View style={styles.HeaderFlex}>
-                    <View style={{alignItems:'flex-end'}}>
-                        <TouchableOpacity>
-                            <Image source={Cart} />
-                        </TouchableOpacity>
-                    </View>
-                    <Searchbar
-                        placeholder="Search"
-                        onChangeText={onChangeSearch}
-                        value={searchQuery}   
-                        style= {styles.Search}    
-                    />
+        <View style={styles.Header}>
+                    <LinearGradient colors={['#00747BCF', '#fff' ]} style={styles.linearGradient}>
+                        <View style={styles.HeaderFlex}>
+                            <Text style={{fontSize:35, top:'20%', paddingLeft:'5%'  }}>Categories</Text>
+                        </View>
+                    </LinearGradient>
                 </View>
-                </LinearGradient>
-            </View>
-            <View style={styles.ImageView}>
-                <Image source={Image1} style={styles.image1} />
-            </View>
             <View style={styles.Body}>
-                <ScrollView>
-                <View style={styles.subBody}>
-                <View style={styles.box}>
-                    <TouchableOpacity>
-                        <Image source={imageCovid}/>
-                    </TouchableOpacity>
+                <View style={styles.BodyLayout}>
+                    <LinearGradient colors={['#007279', '#fff' ]} style={styles.linearGradientBody}>
+                    </LinearGradient>
                 </View>
-                <View style={styles.box}>
-                    <TouchableOpacity>
-                        <Image source={imageCritical}/>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.box}>
-                    <TouchableOpacity>
-                        <Image source={imageNeeds}/>
-                    </TouchableOpacity>
-                </View>
-                </View>
-                <View style={styles.NearestButton}>
-                    <Text style={{fontSize:15}}>Find The Nearest Store</Text>
-                </View>
-              
-                </ScrollView>
-               
-
             </View>
             <View style={styles.Tail}>
              
             <View style={styles.bottomNavi}>
                 <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
-                    <IconI size={24} color="black" name="home-outline" />
+                    <IconI size={24} color="white" name="home-outline" />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('WishlistScreen')}>
                     <IconF5 size={24} color="white" name="heart"  />
@@ -86,7 +52,7 @@ export default HomeScreen = ({navigation}) =>  {
                     <IconI size={24} color="white" name="person-outline" />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('CategoryScreen')}>
-                    <IconM size={24} color="white" name="category" />
+                    <IconM size={24} color="black" name="category" />
                 </TouchableOpacity>
                 </View>
             </View>
@@ -96,29 +62,45 @@ export default HomeScreen = ({navigation}) =>  {
 }
 
 const styles =StyleSheet.create({
-    linearGradient:{
+    linearGradientBody:{
         flex: 1,
+        borderTopRightRadius:26,
+        borderTopLeftRadius:26
+    },
+    linearGradient: {
+        flex: 1,
+    },
+    Main: {
+        width:'100%',
+        height:'93%',
+        backgroundColor:'purple',
     },
     Header: {
         width:'100%',
-        height:'15%',
+        height:'25%',
         // flex:1,
         // backgroundColor:'#010101'
     },
-    ImageView: {
-        width:'100%',
-        height:'30%',
-        alignItems:'center',
-        justifyContent:'center',
-        backgroundColor:'#fff'
-    },
     Body: {
         // flex:4,
+        backgroundColor:'#fff',
+        // padding:'3%',
+        height:'68%',
         width:'100%',
-        height:'48%',
-        backgroundColor:'white',
-        padding:'3%',
         
+        
+    },
+    BodyLayout: {
+        // marginLeft:'10%',
+        // marginRight:'10%',
+        top:'-10%',
+        // backgroundColor:'#00747BCF',
+        height:'100%',
+        width:'90%',
+        borderTopLeftRadius:26,
+        borderTopRightRadius:26,
+        alignSelf:'center'
+
     },
     Tail: {
         // flex:1,
