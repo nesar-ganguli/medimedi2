@@ -77,16 +77,16 @@ export default HomeScreen = ({navigation}) =>  {
              
             <View style={styles.bottomNavi}>
                 <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
-                    <IconI size={24} color="black" name="home-outline" />
+                    <IconI size={24} color="white" name="home-outline" />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('WishlistScreen')}>
-                    <IconF5 size={24} color="white" name="heart"  />
+                    <IconF5 size={24} color="black" name="heart"  />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
-                    <IconI size={24} color="white" name="person-outline" />
+                    <IconI size={24} color="black" name="person-outline" />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('CategoryScreen')}>
-                    <IconM size={24} color="white" name="category" />
+                    <IconM size={24} color="black" name="category" />
                 </TouchableOpacity>
                 </View>
             </View>
@@ -115,7 +115,7 @@ const styles =StyleSheet.create({
     Body: {
         // flex:4,
         width:'100%',
-        height:'48%',
+        height:'45%',
         backgroundColor:'white',
         padding:'3%',
         
@@ -123,7 +123,7 @@ const styles =StyleSheet.create({
     Tail: {
         // flex:1,
         width:'100%',
-        height:'7%',
+        height:'10%',
         backgroundColor:'#fff'
     },
     Search: {

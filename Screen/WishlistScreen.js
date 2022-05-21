@@ -20,7 +20,7 @@ import IconM from 'react-native-vector-icons/MaterialIcons';
 import IconF from 'react-native-vector-icons/FontAwesome5';
 import IconF5 from 'react-native-vector-icons/FontAwesome5';
 
-export default HomeScreen = ({navigation}) =>  {
+export default WishlistScreen = ({navigation}) =>  {
     const [searchQuery, setSearchQuery] = React.useState('');
     const onChangeSearch = query => setSearchQuery(query);
     return (
@@ -45,16 +45,16 @@ export default HomeScreen = ({navigation}) =>  {
              
             <View style={styles.bottomNavi}>
                 <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
-                    <IconI size={24} color="white" name="home-outline" />
+                    <IconI size={24} color="black" name="home-outline" />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('WishlistScreen')}>
-                    <IconF5 size={24} color="black" name="heart"  />
+                    <IconF5 size={24} color="white" name="heart"  />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
-                    <IconI size={24} color="white" name="person-outline" />
+                    <IconI size={24} color="black" name="person-outline" />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('CategoryScreen')}>
-                    <IconM size={24} color="white" name="category" />
+                    <IconM size={24} color="black" name="category" />
                 </TouchableOpacity>
                 </View>
             </View>
@@ -87,7 +87,7 @@ const styles =StyleSheet.create({
         // flex:4,
         backgroundColor:'#fff',
         // padding:'3%',
-        height:'68%',
+        height:'65%',
         width:'100%',
         
         
@@ -107,7 +107,7 @@ const styles =StyleSheet.create({
     Tail: {
         // flex:1,
         width:'100%',
-        height:'7%',
+        height:'10%',
         backgroundColor:'#fff'
     },
     Search: {
