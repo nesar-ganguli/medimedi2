@@ -20,8 +20,8 @@ export default MerchantDashboard = ({navigation}) =>  {
             <SafeAreaView>
               <View style={styles.Header}>
                 <View style={styles.loc}>
-                <Text>nnwinic</Text>
-                <IconE size={24}  name="location-pin" />
+                <IconE size={36}  name="location-pin" />
+                <Text style={{fontSize:16}}>Hebbal</Text>
                 </View>
               </View>
               <View style={styles.SubHeader}></View>
@@ -55,6 +55,9 @@ export default MerchantDashboard = ({navigation}) =>  {
     Header: {
       height:'15%',
       width:'100%',
+      flexDirection:'row',
+      alignItems:'flex-end',
+      padding:'2%',
       // backgroundColor:'#eee'
     },
     SubHeader: {
@@ -72,9 +75,11 @@ export default MerchantDashboard = ({navigation}) =>  {
       width: '100%',
       backgroundColor:'#eee'
     },
-    // loc: {
-      
-    // },
+     loc: {
+        flexDirection:'row',
+        alignItems:'flex-end',
+
+     },
     bottomNavi: {
       backgroundColor:'#D35E5E',
       height:50,
