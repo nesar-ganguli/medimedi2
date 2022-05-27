@@ -36,3 +36,21 @@ app.get("/users", function(req,res){
         }
 });
 }); 
+
+app.post("/customerSignup", function(req,res){
+    console.log(req.body.Name);
+    console.log(req.body.Email);
+    const Name = req.body.Name;
+    const Email = req.body.Email;
+    const Password = req.body.Password;
+    const Aadhar_no = req.body.Aadhar;
+    const Contact = req.body.Contact;
+    con.query(`INSERT INTO CustomerCred (Username, Email, Password, Aadhar_no, Contact)
+    VALUES ("${Name}","${Email}","${Password}",${Aadhar_no},${Contact});`, function(error, res){
+        if(error) console.log(error);
+        else{
+            console.log("Createddddddd")
+        }
+    })
+
+})
