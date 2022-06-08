@@ -20,12 +20,49 @@ export default MerchantDashboard = ({navigation}) =>  {
             <SafeAreaView>
               <View style={styles.Header}>
                 <View style={styles.loc}>
-                <IconE size={36}  name="location-pin" />
+                <IconE size={30}  name="location-pin" />
                 <Text style={{fontSize:16}}>Hebbal</Text>
                 </View>
               </View>
-              <View style={styles.SubHeader}></View>
-              <View style={styles.Body}></View>
+              <View style={styles.SubHeader}>
+                <View style={styles.SH}>
+              {/* <Text style={{ backgroundColor: 'red', flex: 1, textAlignVertical: 'center', textAlign: 'center' }}> ICON 1</Text> */}
+              <TouchableOpacity style={{backgroundColor:'white', width:'100%', height:'30.33%',  borderRadius:12,marginBottom:5}}>
+             
+              </TouchableOpacity>
+              <TouchableOpacity style={{backgroundColor:'#49A8FF', width:'100%', height:'30.33%',borderRadius:12,marginBottom:5}}>
+             
+              </TouchableOpacity>
+              <View style={{flexDirection:'row', width:'100%', height:'30.33%',borderRadius:12,marginBottom:5,justifyContent:'space-between'}}>
+              <View style={{backgroundColor:'rgba(68, 198, 73, 1)', width:'48%', height:'100%',borderRadius:12}}>
+            
+              </View>
+              <View style={{backgroundColor:'red', width:'48%', height:'100%',borderRadius:12}}>
+            
+              </View>
+              </View>
+              </View>
+              </View>
+              <View style={styles.Body}>
+              <View style={{ flexDirection: 'row', height:'50%',padding:10,paddingTop:15}}>
+              <View style={{backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              {/* <Text style={{ backgroundColor:'green',flex: 1, textAlignVertical: 'center', textAlign: 'center'}}> Total Sales</Text> */}
+              </View>
+              <View style={{backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              {/* <Text style={{ backgroundColor:'green',flex: 1, textAlignVertical: 'center', textAlign: 'center'}}> Total Sales</Text> */}
+              </View>
+          </View>
+
+              <View style={{flexDirection: 'row',height:'50%',padding:10}}>
+              <View style={{ backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              {/* <Text style={{ flex: 1, textAlignVertical: 'center', textAlign: 'center'}}> Add offers</Text> */}
+              </View>
+              <View style={{backgroundColor: 'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              {/* <Text style={{  flex: 1, textAlignVertical: 'center', textAlign: 'center' }}></Text> */}
+              </View>
+              
+          </View>
+              </View>
               <View style={styles.Tail}>
                 <View style={styles.bottomNavi}>
                   <TouchableOpacity onPress={() => navigation.navigate('MerchantDashboard')}>
@@ -62,35 +99,56 @@ export default MerchantDashboard = ({navigation}) =>  {
     },
     SubHeader: {
       height:'30%',
-      width: '100%',
-      backgroundColor:'#fff'
+      width: '94%',
+      backgroundColor:'rgba(255, 108, 108, 0.2)',
+      borderRadius:18,
+      padding:5,
+      alignSelf:'center',
+      marginLeft:3
+      
+      // padding:7,
+      
+      // alignItems:'center',
+      // justifyContent:'center'
     },
     Body: {
       height:'45%',
-      width:'100%',
-      backgroundColor:'#aaa'
+      width:'97%',
+      // backgroundColor:""
+      alignSelf:'center',
+      
     },
     Tail: {
       height:'10%',
       width: '100%',
-      backgroundColor:'#eee'
+      // backgroundColor:'#eee'
     },
      loc: {
         flexDirection:'row',
         alignItems:'flex-end',
+        marginLeft:5,
 
      },
     bottomNavi: {
       backgroundColor:'#D35E5E',
       height:50,
-      width: '97%',
+      width: '94%',
+      alignSelf:'center',
       alignItems:'center',
       justifyContent:'space-evenly',
       borderRadius:26,
       margin:5,
-      // padding:10,
+      marginLeft:6,
       top:5,
       flexDirection:'row',
+
+  },
+  SH:{
+    justifyContent:'space-evenly',
+    flexDirection:'column',
+    padding:10,
+    
+    // paddingBottom:5    
   },
         
   })
