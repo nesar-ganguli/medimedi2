@@ -5,15 +5,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import {LinearGradient} from 'expo-linear-gradient';
 import { Searchbar } from 'react-native-paper';
 import Image1 from '../assets/Pictures/image1.png'
-import Cart from '../assets/Pictures/Cart.png'
+import imageProfile from '../assets/Pictures/imageProfile.png'
 import { ScrollView } from 'react-native';
-import imageCovid from '../assets/Pictures/imageCovid.png';
-import imageCritical from '../assets/Pictures/imageCritical.png';
-import imageNeeds from '../assets/Pictures/imageNeeds.png';
-import imageNearest from '../assets/Pictures/imageNearest.png';
-import homeBtn from '../assets/Pictures/homeBtn.png';
-import heartBtn from '../assets/Pictures/heartBtn.png';
-import categoriesBtn from '../assets/Pictures/categoriesBtn.png';
+import imageEditProfile from '../assets/Pictures/imageEditProfile.png';
+import myOrders from '../assets/Pictures/myOrders.png';
+import myAdresses from '../assets/Pictures/myAdresses.png';
+import needHelp from '../assets/Pictures/needHelp.png';
+import termsConditions from '../assets/Pictures/termsConditions.png';
+import changePassword from '../assets/Pictures/changePassword.png';
+import logout from '../assets/Pictures/logout.png';
 import profileBtn from '../assets/Pictures/profileBtn.png';
 import IconI from 'react-native-vector-icons/Ionicons';
 import IconM from 'react-native-vector-icons/MaterialIcons';
@@ -27,18 +27,69 @@ export default ProfileScreen = ({navigation}) =>  {
         <SafeAreaView>
         <View style={{flexDirection: "column"}}>
             {/* <View style={styles.Main}> */}
-                <View style={styles.Header}>
-                    <LinearGradient colors={['#00747BCF', '#fff' ]} style={styles.linearGradient}>
-                        <View style={styles.HeaderFlex}>
-                            <Text style={{fontSize:35, top:'20%', paddingLeft:'5%'  }}>My Profile</Text>
+            <View style={styles.Header}>
+                <LinearGradient colors={['#00747BCF', '#fff' ]} style={styles.linearGradient}>
+                    <View style={styles.HeaderBody}>
+                        {/* <View style={styles.ImageView}>
+                            <Image source={imageProfile} />
+                        </View>  */}
+                        {/* <View style={styles.HeaderFlex}>
+                            <Text style={{fontSize:15}}>Anupam Kumar</Text>
+                            <Text style={{fontSize:15}}>9876543210</Text>
                         </View>
-                    </LinearGradient>
+                        <View style={styles.ImageView2}>
+                            <Image source={imageEditProfile} />
+                        </View> */}
+                        <View style={styles.ImageView}>
+                            <Image source={imageProfile} />
+                            </View> 
+                        <View style={styles.HeaderFlex}>
+                            <Text style={{fontSize:20 , color:'white'}}>Anupam Kumar</Text>
+                            <Text style={{fontSize:15 , color:'white'}}>9876543210</Text>
+                        </View>
+                        <View style={styles.ImageView2}>
+                        <TouchableOpacity onPress={() => navigation.navigate('EditProfileScreen')}>
+                            <Image source={imageEditProfile} />
+                        </TouchableOpacity>
+                        </View>
+                    </View>
+                </LinearGradient>
                 </View>
             <View style={styles.Body}>
                 <View style={styles.BodyLayout}>
                     <LinearGradient colors={['#007279', '#fff' ]} style={styles.linearGradientBody}>
-                        <View>
-                            
+                        <View style={styles.BodyPadding}>
+                        <View style={styles.BodyItemsPadding}>
+                        <TouchableOpacity>
+                            <Image source={myOrders} />
+                        </TouchableOpacity>    
+                        </View>
+                        <View style={styles.BodyItemsPadding}>
+                        <TouchableOpacity>
+                            <Image source={myAdresses} />
+                        </TouchableOpacity>
+                        </View>
+                        <View style={{borderBottomColor: 'black',borderBottomWidth: 1, }} />
+                        <View style={styles.BodyItemsPadding}>
+                        <TouchableOpacity>
+                            <Image source={needHelp} />
+                        </TouchableOpacity>
+                        </View>
+                        <View style={styles.BodyItemsPadding}>
+                        <TouchableOpacity>
+                            <Image source={termsConditions} />
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.BodyItemsPadding}>
+                        <TouchableOpacity>
+                            <Image source={changePassword} />
+                        </TouchableOpacity>
+                        </View>
+                        <View style={styles.BodyItemsPadding}>
+                        <TouchableOpacity onPress={() => navigation.navigate('CustomerLogin')}>
+                            <Image source={logout} />
+                            </TouchableOpacity>
+                        </View>
                         </View>
                     </LinearGradient>
                 </View>
@@ -83,6 +134,9 @@ const styles =StyleSheet.create({
     Header: {
         width:'100%',
         height:'25%',
+        //flexDirection:'row',
+        // alignItems:'center',
+        justifyContent:'center',
         // flex:1,
         // backgroundColor:'#010101'
     },
@@ -94,6 +148,19 @@ const styles =StyleSheet.create({
         width:'100%',
         
         
+    },
+    HeaderBody:{
+        flexDirection:'row',
+        top: '4%',
+        width:'100%',
+        height:'100%',
+    },
+    BodyPadding:{
+        padding:'5%',
+    },
+    BodyItemsPadding:{
+        padding:'5%',
+        //color : '#a9a9a9',
     },
     BodyLayout: {
         // marginLeft:'10%',
@@ -127,10 +194,14 @@ const styles =StyleSheet.create({
     
     },
     HeaderFlex: {
-        flex:1,
+        //flex:1,
+        //backgroundColor: 'purple',
+        width:'50%',
+        height:'50%',
         flexDirection:'column',
         padding:'3%',
-        
+        alignItems:'flex-start',
+        justifyContent:'center',
     },
     box: {
         width: '33.33%',
@@ -174,6 +245,30 @@ const styles =StyleSheet.create({
     },
    icon: {
        color:'black',
-   }
+   },
+   ImageView: {
+    width:'30%',
+    height:'50%',
+    alignItems:'center',
+    justifyContent:'center',
+   // backgroundColor:'#fff'
+},
+ImageView2: {
+    width:'20%',
+    height:'50%',
+    alignItems:'center',
+    justifyContent:'center',
+    //backgroundColor: 'orange',
+},
+image1: {
+    flex: 1,
+    height: null,
+    width:'100%',
+    resizeMode: 'contain',
+    // flex: 1,
+    // aspectRatio: .75, 
+    // resizeMode: 'contain',
+    
+    },
 
 })
