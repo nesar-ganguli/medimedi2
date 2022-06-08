@@ -23,7 +23,7 @@ export default CustomerSignUp = ({navigation}) =>  {
             <Text style={styles.Meditext}>Medifind</Text>
             </View>
             <View style={styles.inputview}>
-            <TextInput style={styles.textinput}
+            <TextInput 
                 backgroundColor='#D2F7FF'
                 label="Name"
                 value={Name}
@@ -42,7 +42,7 @@ export default CustomerSignUp = ({navigation}) =>  {
                 backgroundColor='#F9E2E4'
                 label="License Number"
                 value={License}
-                onChangeText={License => setAadhar(License)}/>
+                onChangeText={License => setLicense(License)}/>
              <TextInput 
                 backgroundColor='#D2F7FF'
                 label="Aadhar number"
