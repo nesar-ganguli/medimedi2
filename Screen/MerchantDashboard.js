@@ -24,8 +24,40 @@ export default MerchantDashboard = ({navigation}) =>  {
                 <Text style={{fontSize:16}}>Hebbal</Text>
                 </View>
               </View>
-              <View style={styles.SubHeader}></View>
-              <View style={styles.Body}></View>
+              <View style={styles.SubHeader}>
+                <View style={styles.SH}>
+              {/* <Text style={{ backgroundColor: 'red', flex: 1, textAlignVertical: 'center', textAlign: 'center' }}> ICON 1</Text> */}
+              <View style={{backgroundColor:'white', width:'100%', height:'33.33%',  borderRadius:12,padding:5}}>
+
+              </View>
+              <View style={{backgroundColor:'red', width:'100%', height:'33.33%',borderRadius:12,padding:5}}>
+
+              </View>
+              <View style={{backgroundColor:'blue', width:'100%', height:'33.33%',borderRadius:12,padding:5}}>
+
+              </View>
+              </View>
+              </View>
+              <View style={styles.Body}>
+              <View style={{ flex: 1, flexDirection: 'row', height:'50%',padding:10}}>
+              <View style={{backgroundColor:'green', height:'100%',width:'50%', borderRadius:12,marginRight:5}}>
+              {/* <Text style={{ backgroundColor:'green',flex: 1, textAlignVertical: 'center', textAlign: 'center'}}> Total Sales</Text> */}
+              </View>
+              <View style={{height:'100%',width:'50%', borderRadius:12}}>
+              <Text style={{ backgroundColor: 'pink', flex: 1, textAlignVertical: 'center', textAlign: 'center' }}> No of Orders</Text>
+              </View>
+          </View>
+
+              <View style={{ flex: 1, flexDirection: 'row',height:'50%',padding:7,marginTop:3.5}}>
+              <View style={{ height:'100%',width:'50%', borderRadius:12,marginRight:3.5}}>
+              <Text style={{ backgroundColor:'yellow',flex: 1, textAlignVertical: 'center', textAlign: 'center'}}> Add offers</Text>
+              </View>
+              <View style={{height:'100%',width:'50%', borderRadius:12}}>
+              <Text style={{ backgroundColor: 'lightblue', flex: 1, textAlignVertical: 'center', textAlign: 'center' }}></Text>
+              </View>
+              
+          </View>
+              </View>
               <View style={styles.Tail}>
                 <View style={styles.bottomNavi}>
                   <TouchableOpacity onPress={() => navigation.navigate('MerchantDashboard')}>
@@ -63,12 +95,16 @@ export default MerchantDashboard = ({navigation}) =>  {
     SubHeader: {
       height:'30%',
       width: '100%',
-      backgroundColor:'#fff'
+      backgroundColor:'#ff6c6c',
+      padding:7,
+      
+      // alignItems:'center',
+      // justifyContent:'center'
     },
     Body: {
       height:'45%',
       width:'100%',
-      backgroundColor:'#aaa'
+      backgroundColor:'#eee'
     },
     Tail: {
       height:'10%',
@@ -91,6 +127,13 @@ export default MerchantDashboard = ({navigation}) =>  {
       // padding:10,
       top:5,
       flexDirection:'row',
+
+  },
+
+  SH:{
+    flexDirection:'column',
+    flexWrap:'wrap',
+    alignItems:'center',
   },
         
   })
