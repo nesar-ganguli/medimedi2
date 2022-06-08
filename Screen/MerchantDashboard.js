@@ -33,9 +33,14 @@ export default MerchantDashboard = ({navigation}) =>  {
               <TouchableOpacity style={{backgroundColor:'#49A8FF', width:'100%', height:'30.33%',borderRadius:12,marginBottom:5}}>
              
               </TouchableOpacity>
-              <TouchableOpacity style={{backgroundColor:'blue', width:'100%', height:'30.33%',borderRadius:12,marginBottom:5}}>
+              <View style={{flexDirection:'row', width:'100%', height:'30.33%',borderRadius:12,marginBottom:5,justifyContent:'space-between'}}>
+              <View style={{backgroundColor:'rgba(68, 198, 73, 1)', width:'48%', height:'100%',borderRadius:12}}>
             
-              </TouchableOpacity>
+              </View>
+              <View style={{backgroundColor:'red', width:'48%', height:'100%',borderRadius:12}}>
+            
+              </View>
+              </View>
               </View>
               </View>
               <View style={styles.Body}>
@@ -134,7 +139,6 @@ export default MerchantDashboard = ({navigation}) =>  {
       borderRadius:26,
       margin:5,
       marginLeft:6,
-      // padding:10,
       top:5,
       flexDirection:'row',
 
