@@ -9,9 +9,55 @@ import HomeScreen from './HomeScreen';
 
 const {width, height} = Dimensions.get('window');
 
-export default CustomerLogin = ({navigation}) =>  {
-    const [Email,setEmail] = React.useState("");
+export default CustomerLogin = ({navigation, props}) =>  {
+    const [Name,setName] = React.useState("");
     const [Password,setPassword] = React.useState("");
+    const login = async (props) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ Name:Name, Password:Password})
+        };
+        try {
+            await fetch(
+                'http://192.168.1.7:4545/customerLogin', requestOptions)
+                .then(res => {
+                    res.json()
+                        .then(data => {
+                            
+                            // props.navigation.replace('CustomerLogin')
+                            console.log(data)
+                            const response = data.Msg;
+                            console.log(response);
+                            if(response === "Not Authenticated"){
+                                alert("Username or Password is Wrong. Try again.")
+                                props.navigation.replace('HomeScreen');
+                            }
+                            else{
+                                alert("Login Successfully!!");
+                                
+                            }
+                        });
+                })
+                
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
+    const validateLogin = async (props) => {
+        console.log("ergver");
+        if(Name.length === 0){
+            alert("Name can't be empty" );
+        }else if(Password.length === 0){
+            alert("Password can't be empty" );
+        }else if(Password.length < 8){
+            alert("Password must be 8 characters");
+        }else{
+            login(props)
+        }
+    }
+
     return (
       <LinearGradient colors={['#80F0FF', '#FFFFFF' ]} style={styles.linearGradient}>
           <SafeAreaView>
@@ -19,20 +65,21 @@ export default CustomerLogin = ({navigation}) =>  {
             <Text style={styles.Meditext}>Medifind</Text>
             </View>
             <View style={styles.Text}>
-            <TextInput style={styles.TextInput}
+            <TextInput 
                 backgroundColor='#D2F7FF'
-                label="Email"
-                value={Email}
-                onChangeText={Email => setEmail(Email)}/>
+                label="Name"
+                value={Name}
+                onChangeText={Name => setName(Name)}/>
             </View>
             <View style={styles.Text} >
-            <TextInput style={styles.TextInput}
+            <TextInput 
                 backgroundColor='#F9E2E4'
                 label="Password"
                 value={Password}
                 onChangeText={Password => setPassword(Password)}/>
             </View>
             <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
+            {/* <TouchableOpacity onPress={() => validateLogin(props)}> */}
             <View style={styles.Login} >
                 <Text style={{fontSize:19, color:'#FFFFFF'}}>Login</Text>
             </View>

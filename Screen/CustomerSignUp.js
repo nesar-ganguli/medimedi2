@@ -8,13 +8,85 @@ import { useState } from "react";
 // import CheckBox from '@react-native-community/checkbox';
 const {width, height} = Dimensions.get('window');
 
-export default CustomerSignUp = ({navigation}) =>  {
-    const [Name,setName] = React.useState("");
-    const [Email,setEmail] = React.useState("");
-    const [Password,setPassword] = React.useState("");
-    const [Aadhar,setAadhar] = React.useState("");
-    const [Contact,setContact] = React.useState("");
+export default CustomerSignUp = ({navigation, props}) =>  {
+    const [Name,setName] = useState("");
+    const [Email,setEmail] = useState("");
+    const [Password,setPassword] = useState("");
+    const [Aadhar,setAadhar] = useState("");
+    const [Contact,setContact] = useState("");
     const [toggleCheckBox, setToggleCheckBox] = useState(false);
+
+
+    const signup = async (props) => {
+        console.log(Name)
+        console.log(Email)
+        console.log(Password)
+        console.log(Aadhar)
+        console.log(Contact)
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ Name:Name, Email:Email, Password:Password, Aadhar:Aadhar, Contact:Contact })
+        };
+        try {
+            await fetch(
+                'http://192.168.1.7:4545/customerSignup', requestOptions)
+                .then(res => {
+                    // Alert.alert("Registered")
+                    // console.log(response.json())
+                    // console.log(res.json)
+                    res.json()
+                        .then(data => {
+                            
+                            // props.navigation.replace('CustomerLogin')
+                            console.log(data)
+                            const response = data.Msg;
+                            console.log(response);
+                            if(response === "Not Created"){
+                                alert("Username exists, try another Username")
+                            }
+                            else{
+                                alert("Registered Successfully!!");
+                                // props.navigation.replace('CustomerLogin')
+                            }
+                        });
+                })
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
+    
+    const validate = async (props) => {
+        console.log("ergver");
+        if(Name.length === 0){
+            console.log("empty");
+            alert("Name can't be empty" );
+        }else if(Email.length === 0){
+            alert("Email can't be empty" );
+        }else if(Password.length === 0){
+            alert("Password can't be empty" );
+        }else if(Aadhar.length === 0){
+            alert("Aadhar can't be empty" );
+        }else if(Contact.length === 0){
+            alert("Contact can't be empty" );
+        }else if(Password.length < 8){
+            alert("Password must be 8 characters");
+        }else if(Aadhar.length !== 12){
+            alert("Invalid Aadhar Number. Provide 12 digits" );
+        }
+        // }else if(Aadhar.isInteger()){
+        //     alert("nvalid Aadhar Number. Provide 12 digits" );
+        // }
+        else if(Contact.length !== 10){
+            alert("Invalid Contact Number. Provide 10 digits" );
+        }else{
+            signup(props)
+        }
+    }
+
+    
+
     return (
         <LinearGradient colors={['#80F0FF', '#FFFFFF' ]} style={styles.linearGradient}> 
         <SafeAreaView>
@@ -22,7 +94,7 @@ export default CustomerSignUp = ({navigation}) =>  {
             <Text style={styles.Meditext}>Medifind</Text>
             </View>
             <View style={styles.inputview}>
-            <TextInput style={styles.textinput}
+            <TextInput //style={styles.textinput}
                 backgroundColor='#D2F7FF'
                 label="Name"
                 value={Name}
@@ -51,7 +123,7 @@ export default CustomerSignUp = ({navigation}) =>  {
             <View style={styles.terms}>
             <Text>I agree with the terms and conditions</Text>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate('CustomerLogin')}>
+            <TouchableOpacity onPress={() => validate(props)}>
             <View style={styles.SignupRect} >
                 <Text style={{fontSize:19, color:'#FFFFFF'}}>SignUp</Text>
             </View>
