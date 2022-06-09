@@ -28,6 +28,75 @@ export default MerchantCategory = ({navigation}) =>  {
             <View style={styles.Body}>
                 <View style={styles.BodyLayout}>
                     <LinearGradient colors={['#EDA8AE', '#fff' ]} style={styles.linearGradientBody}>
+
+              <View style={{ flexDirection: 'row', height:'20%',padding:10,paddingTop:15}}>  
+              <TouchableOpacity style={{alignItems:'center',justifyContent:'center',backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View >
+              <Text style={{textAlign:'center', justifyContent:'center'}}> Ayurveda</Text>
+              </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={{alignItems:'center',justifyContent:'center',backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View >
+              <Text style={{textAlignVertical: 'center', textAlign: 'center'}}> Medicines</Text>
+              </View>
+              </TouchableOpacity>
+          </View>
+
+              <View style={{flexDirection: 'row',height:'20%',padding:10}}>
+                  <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View >
+              <Text style={{ textAlignVertical: 'center', textAlign: 'center'}}> Homeopathy</Text>
+              </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View>
+              <Text style={{textAlignVertical: 'center', textAlign: 'center' }}>Health Essentials</Text>
+              </View>
+              </TouchableOpacity>
+              </View>
+              
+              <View style={{flexDirection: 'row',height:'20%',padding:10}}>
+              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View >
+              <Text style={{ textAlignVertical: 'center', textAlign: 'center'}}>Covid Essentials</Text>
+              </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View>
+              <Text style={{textAlignVertical: 'center', textAlign: 'center' }}>Sanitizers and Handwash</Text>
+              </View>
+              </TouchableOpacity>
+              
+          
+              </View>
+              <View style={{flexDirection: 'row',height:'20%',padding:10}}>
+                  <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View>
+              <Text style={{ textAlignVertical: 'center', textAlign: 'center'}}>Women care</Text>
+              </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View>
+              <Text style={{textAlignVertical: 'center', textAlign: 'center' }}>Immunity Booster</Text>
+              </View>
+              </TouchableOpacity>
+              
+          
+              </View>
+              <View style={{flexDirection: 'row',height:'20%',padding:10}}>
+                  <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View>
+              <Text style={{ textAlignVertical: 'center', textAlign: 'center'}}> Everyday Needs</Text>
+              </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View>
+              <Text style={{textAlignVertical: 'center', textAlign: 'center' }}>Others</Text>
+              </View>
+              </TouchableOpacity>
+              
+          
+              </View>
                     </LinearGradient>
                 </View>
             </View>

@@ -45,20 +45,20 @@ export default MerchantDashboard = ({navigation}) =>  {
               </View>
               <View style={styles.Body}>
               <View style={{ flexDirection: 'row', height:'50%',padding:10,paddingTop:15}}>
-              <View style={{backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
-              {/* <Text style={{ backgroundColor:'green',flex: 1, textAlignVertical: 'center', textAlign: 'center'}}> Total Sales</Text> */}
+              <View style={{alignItems:'center',justifyContent:'center',backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <Text style={{textAlign:'center', justifyContent:'center'}}> Total Sales</Text>
               </View>
-              <View style={{backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
-              {/* <Text style={{ backgroundColor:'green',flex: 1, textAlignVertical: 'center', textAlign: 'center'}}> Total Sales</Text> */}
+              <View style={{alignItems:'center',justifyContent:'center',backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <Text style={{textAlignVertical: 'center', textAlign: 'center'}}> Total Sales</Text>
               </View>
           </View>
 
               <View style={{flexDirection: 'row',height:'50%',padding:10}}>
-              <View style={{ backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
-              {/* <Text style={{ flex: 1, textAlignVertical: 'center', textAlign: 'center'}}> Add offers</Text> */}
+              <View style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <Text style={{ textAlignVertical: 'center', textAlign: 'center'}}> Add offers</Text>
               </View>
-              <View style={{backgroundColor: 'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
-              {/* <Text style={{  flex: 1, textAlignVertical: 'center', textAlign: 'center' }}></Text> */}
+              <View style={{alignItems:'center',justifyContent:'center',backgroundColor: 'lightblue',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <Text style={{textAlignVertical: 'center', textAlign: 'center' }}>Add something here</Text>
               </View>
               
           </View>
