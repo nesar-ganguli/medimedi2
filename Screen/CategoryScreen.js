@@ -20,6 +20,17 @@ import IconM from 'react-native-vector-icons/MaterialIcons';
 import IconF from 'react-native-vector-icons/FontAwesome5';
 import IconF5 from 'react-native-vector-icons/FontAwesome5';
 import Ayurveda from '../assets/Pictures/Ayurveda.png';
+import Ayur from '../assets/Pictures/Ayur.png';
+import medicine from '../assets/Pictures/medicine.png';
+import homeopathy from '../assets/Pictures/homeopathy.png';
+import healthessential from '../assets/Pictures/healthessential.png';
+import covidessential from '../assets/Pictures/covidessential.png';
+import sanitizer from '../assets/Pictures/sanitizer.png';
+import womenscare from '../assets/Pictures/womenscare.png';
+import immunitybooster from '../assets/Pictures/immunitybooster.png';
+import everydayneeds from '../assets/Pictures/everydayneeds.png';
+import others from '../assets/Pictures/others.png';
+
 
 export default CategoryScreen = ({navigation}) =>  {
     const [searchQuery, setSearchQuery] = React.useState('');
@@ -30,7 +41,7 @@ export default CategoryScreen = ({navigation}) =>  {
         <View style={styles.Header}>
                     <LinearGradient colors={['#00747BCF', '#fff' ]} style={styles.linearGradient}>
                         <View style={styles.HeaderFlex}>
-                            <Text style={{fontSize:35, top:'20%', paddingLeft:'5%'  }}>Categories</Text>
+                            <Text style={{fontSize:35, top:'20%', paddingLeft:'5%'  }}>Category</Text>
                         </View>
                     </LinearGradient>
                 </View>
@@ -40,41 +51,56 @@ export default CategoryScreen = ({navigation}) =>  {
                     <View style={{ flexDirection: 'row', height:'20%',padding:10,paddingTop:15}}>  
               <TouchableOpacity style={{alignItems:'center',justifyContent:'center',backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
               <View>
-              <Image source={Ayurveda} style={styles.ayurveda}/>
+              <Image source={Ayur} style={styles.ayurveda}/>
               </View>
               <View>
-              <Text style={{textAlign:'right', marginLeft:'30%',justifyContent:'center',top:'-200%'}}> Ayurveda</Text>
+              <Text style={{textAlign:'right', marginLeft:'20%',justifyContent:'center',top:'-130%'}}> Ayurveda</Text>
               </View> 
               </TouchableOpacity>
               <TouchableOpacity style={{alignItems:'center',justifyContent:'center',backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View>
+              <Image source={medicine} style={styles.ayurveda}/>
+              </View>
               <View >
-              <Text style={{textAlignVertical: 'center', textAlign: 'center'}}> Medicines</Text>
+              <Text style={{textAlignVertical: 'center', textAlign: 'right',top:'-130%',marginLeft:'20%'}}> Medicines</Text>
               </View>
               </TouchableOpacity>
           </View>
 
               <View style={{flexDirection: 'row',height:'20%',padding:10}}>
                   <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+                  <View>
+              <Image source={homeopathy} style={styles.ayurveda}/>
+              </View>
               <View >
-              <Text style={{ textAlignVertical: 'center', textAlign: 'center'}}> Homeopathy</Text>
+              <Text style={{ textAlignVertical: 'center', textAlign: 'center',marginLeft:'20%',top:'-130%'}}> Homeopathy</Text>
               </View>
               </TouchableOpacity>
               <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
               <View>
-              <Text style={{textAlignVertical: 'center', textAlign: 'center' }}>Health Essentials</Text>
+              <Image source={healthessential} style={styles.ayurveda}/>
+              </View>
+              <View>
+              <Text style={{textAlignVertical: 'center', textAlign: 'center',marginLeft:'30%',top:'-130%' }}>Health Essentials</Text>
               </View>
               </TouchableOpacity>
               </View>
               
               <View style={{flexDirection: 'row',height:'20%',padding:10}}>
               <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View>
+              <Image source={covidessential} style={styles.ayurveda}/>
+              </View>
               <View >
-              <Text style={{ textAlignVertical: 'center', textAlign: 'center'}}>Covid Essentials</Text>
+              <Text style={{ textAlignVertical: 'center', textAlign: 'center',marginLeft:'30%',top:'-130%'}}>Covid Essentials</Text>
               </View>
               </TouchableOpacity>
               <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
               <View>
-              <Text style={{textAlignVertical: 'center', textAlign: 'center' }}>Sanitizers and Handwash</Text>
+              <Image source={sanitizer} style={styles.ayurveda}/>
+              </View>
+              <View>
+              <Text style={{textAlignVertical: 'center', textAlign: 'center',marginLeft:'20%',top:'-80%'}}>Sanitizers and Handwash</Text>
               </View>
               </TouchableOpacity>
               
@@ -82,13 +108,19 @@ export default CategoryScreen = ({navigation}) =>  {
               </View>
               <View style={{flexDirection: 'row',height:'20%',padding:10}}>
                   <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+                  <View>
+              <Image source={womenscare} style={styles.ayurveda}/>
+              </View>
               <View>
-              <Text style={{ textAlignVertical: 'center', textAlign: 'center'}}>Women care</Text>
+              <Text style={{ textAlignVertical: 'center', textAlign: 'center',marginLeft:'20%',top:'-130%'}}>Women care</Text>
               </View>
               </TouchableOpacity>
               <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
               <View>
-              <Text style={{textAlignVertical: 'center', textAlign: 'center' }}>Immunity Booster</Text>
+              <Image source={immunitybooster} style={styles.ayurveda}/>
+              </View>
+              <View>
+              <Text style={{textAlignVertical: 'center', textAlign: 'center',marginLeft:'30%',top:'-130%'}}>Immunity Booster</Text>
               </View>
               </TouchableOpacity>
               
@@ -96,13 +128,19 @@ export default CategoryScreen = ({navigation}) =>  {
               </View>
               <View style={{flexDirection: 'row',height:'20%',padding:10}}>
                   <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+                  <View>
+              <Image source={everydayneeds} style={styles.ayurveda}/>
+              </View>
               <View>
-              <Text style={{ textAlignVertical: 'center', textAlign: 'center'}}> Everyday Needs</Text>
+              <Text style={{ textAlignVertical: 'center', textAlign: 'center',marginLeft:'25%',top:'-130%'}}> Everyday Needs</Text>
               </View>
               </TouchableOpacity>
               <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
               <View>
-              <Text style={{textAlignVertical: 'center', textAlign: 'center' }}>Others</Text>
+              <Image source={others} style={styles.ayurveda}/>
+              </View>
+              <View>
+              <Text style={{textAlignVertical: 'center', textAlign: 'center',marginLeft:'20%',top:'-130%'}}>Others</Text>
               </View>
               </TouchableOpacity>
               
@@ -168,8 +206,8 @@ const styles =StyleSheet.create({
         // marginRight:'10%',
         top:'-10%',
         // backgroundColor:'#00747BCF',
-        height:'100%',
-        width:'90%',
+        height:'110%',
+        width:'98%',
         borderTopLeftRadius:26,
         borderTopRightRadius:26,
         alignSelf:'center'
