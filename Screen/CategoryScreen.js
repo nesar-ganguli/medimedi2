@@ -100,7 +100,7 @@ export default CategoryScreen = ({navigation}) =>  {
               <Image source={sanitizer} style={styles.ayurveda}/>
               </View>
               <View>
-              <Text style={{textAlignVertical: 'center', textAlign: 'center',marginLeft:'20%',top:'-80%'}}>Sanitizers and Handwash</Text>
+              <Text style={{textAlignVertical: 'center', textAlign: 'center',marginLeft:'20%',top:'-80%'}}>Sanitizers & Handwash</Text>
               </View>
               </TouchableOpacity>
               

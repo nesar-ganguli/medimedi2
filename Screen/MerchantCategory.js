@@ -91,7 +91,7 @@ export default MerchantCategory = ({navigation}) =>  {
               <Image source={sanitizer} style={styles.ayurveda}/>
               </View>
               <View>
-              <Text style={{textAlignVertical: 'center', textAlign: 'center',marginLeft:'20%',top:'-80%'}}>Sanitizers and Handwash</Text>
+              <Text style={{textAlignVertical: 'center', textAlign: 'center',marginLeft:'13%',top:'-80%'}}>Sanitizers & Handwash</Text>
               </View>
               </TouchableOpacity>
               
@@ -200,7 +200,7 @@ export default MerchantCategory = ({navigation}) =>  {
             top:'-10%',
             // backgroundColor:'#00747BCF',
             height:'110%',
-            width:'98%',
+            width:'97%',
             borderTopLeftRadius:26,
             borderTopRightRadius:26,
             alignSelf:'center'
