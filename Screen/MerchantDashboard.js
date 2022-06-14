@@ -46,7 +46,7 @@ export default MerchantDashboard = ({navigation}) =>  {
               <View style={styles.Body}>
               <View style={{ flexDirection: 'row', height:'50%',padding:10,paddingTop:15}}>
               <View style={{backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
-              {/* <Text style={{ backgroundColor:'green',flex: 1, textAlignVertical: 'center', textAlign: 'center'}}> Total Sales</Text> */}
+              <Text style={{textAlignVertical: 'center', textAlign: 'center',color:'balck'}}> Total Sales</Text>
               </View>
               <View style={{backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
               {/* <Text style={{ backgroundColor:'green',flex: 1, textAlignVertical: 'center', textAlign: 'center'}}> Total Sales</Text> */}

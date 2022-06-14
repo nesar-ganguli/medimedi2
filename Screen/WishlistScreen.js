@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { StyleSheet, View, Text, Image } from "react-native"
+import { StyleSheet, View, Text, Image,FlatList } from "react-native"
 import { Dimensions, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {LinearGradient} from 'expo-linear-gradient';
-import { Searchbar } from 'react-native-paper';
+import { Button, Searchbar } from 'react-native-paper';
 import Image1 from '../assets/Pictures/image1.png'
 import Cart from '../assets/Pictures/Cart.png'
 import { ScrollView } from 'react-native';
@@ -19,10 +19,26 @@ import IconI from 'react-native-vector-icons/Ionicons';
 import IconM from 'react-native-vector-icons/MaterialIcons';
 import IconF from 'react-native-vector-icons/FontAwesome5';
 import IconF5 from 'react-native-vector-icons/FontAwesome5';
+import IconA from 'react-native-vector-icons/AntDesign';
 
-export default WishlistScreen = ({navigation}) =>  {
+import { useState,useEffect } from 'react';
+
+export default WishlistScreen  = ({navigation}) =>  {
     const [searchQuery, setSearchQuery] = React.useState('');
     const onChangeSearch = query => setSearchQuery(query);
+    const [data, setData] = useState();
+
+    const fetchData= async()=>{
+        const response = await fetch('https://raw.githubusercontent.com/Hardeepcoder/fake_json/master/Users');
+        const users = await response.json();
+        setData(users);
+    
+    }
+    useEffect(() => {
+        fetchData();
+      });
+    
+
     return (
         <SafeAreaView>
         <View style={{flexDirection: "column"}}>
@@ -36,7 +52,43 @@ export default WishlistScreen = ({navigation}) =>  {
                 </View>
             <View style={styles.Body}>
                 <View style={styles.BodyLayout}>
-                    <LinearGradient colors={['#007279', '#fff' ]} style={styles.linearGradientBody}>
+                    <LinearGradient colors={['rgba(0, 114, 121, 0.61)', '#fff' ]} style={styles.linearGradientBody}>
+                        <FlatList
+                            data={data}
+                            keyExtractor={(item,index) => index.toString()}
+                            renderItem={({item}) =>
+
+                            <View style={{backgroundColor:'rgba(119, 180, 185, 0.8)',padding:5,marginBottom:3}}>
+                                <View style={{flex:0.2,alignItems:'flex-end'}}>
+                                    <TouchableOpacity>
+                                        <IconI size={24} color="black" name="heart" />
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{flex:0.8,flexDirection:'row'}}>
+                                    <View style={{padding:5,flex:0.4}}>
+                                    <Text style={{color:'#fff', fontWeight:'bold'}}>{item.name}</Text>
+                                    </View>
+                                    <View style={{padding:5, flexDirection:'column',flex:0.7}}>
+                                        <Text style={{color:'#fff', fontWeight:'bold',alignSelf:'stretch'}}>{item.name}</Text>
+                                        <Text style={{color:'#fff',alignSelf:'stretch'}}>{item.email}</Text>
+                                        <Text>City: {item.address.city}</Text>
+                                    </View>
+                                    <View style={{padding:5,flex:0.3, alignItems:'flex-end',justifyContent:'flex-end'}}>
+                                    <View style={{ borderRadius:50,height:'50%', width:'80%', alignItems:'center',justifyContent:'center', borderWidth:1,borderColor:'black'}}>
+                                        <Text style={{color:'rgba(0, 116, 123, 1)'}}>+ Add</Text>
+                                    </View>
+                                    </View>
+                                </View>
+                                
+                                {/* <Text style={{color:'#fff', fontWeight:'bold'}}>{item.name}</Text>
+                                <Text style={{color:'#fff'}}>{item.email}</Text>
+                                <Text>City: {item.address.city}</Text> */}
+                                
+                                </View>
+
+                            }
+
+                        />
                     </LinearGradient>
                 </View>
             </View>
@@ -67,7 +119,8 @@ const styles =StyleSheet.create({
     linearGradientBody:{
         flex: 1,
         borderTopRightRadius:26,
-        borderTopLeftRadius:26
+        borderTopLeftRadius:26,
+        paddingTop:40
     },
     linearGradient: {
         flex: 1,
