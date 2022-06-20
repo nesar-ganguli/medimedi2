@@ -18,6 +18,8 @@ import CategoryScreen from './Screen/CategoryScreen';
 import MerchantCategory from './Screen/MerchantCategory';
 import MerchantOrders from './Screen/MerchantOrders';
 import MerchantProfile from './Screen/MerchantProfile';
+import EditProfileScreen from './Screen/EditProfileScreen';
+import AddToWishScreen from './Screen/AddToWishScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,10 +39,12 @@ export default function App() {
         <Stack.Screen name="MerchantDashboard" component={MerchantDashboard} options={{headerShown:false}} />
         <Stack.Screen name="WishlistScreen" component={WishlistScreen} options={{headerShown:false}} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} options={{headerShown:false}} />
+        <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} options={{headerShown:false}} />
         <Stack.Screen name="CategoryScreen" component={CategoryScreen} options={{headerShown:false}} />
         <Stack.Screen name="MerchantCategory" component={MerchantCategory} options={{headerShown:false}} />
         <Stack.Screen name="MerchantOrders" component={MerchantOrders} options={{headerShown:false}} />
         <Stack.Screen name="MerchantProfile" component={MerchantProfile} options={{headerShown:false}} />
+        <Stack.Screen name="AddToWishScreen" component={AddToWishScreen} options={{headerShown:false}} />
 
       </Stack.Navigator>
     </NavigationContainer>
