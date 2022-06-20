@@ -11,6 +11,16 @@ import IconM from 'react-native-vector-icons/MaterialIcons';
 import IconF from 'react-native-vector-icons/FontAwesome5';
 import IconF5 from 'react-native-vector-icons/FontAwesome5';
 import IconO from 'react-native-vector-icons/Octicons';
+import Ayur from '../assets/Pictures/Ayur.png';
+import medicine from '../assets/Pictures/medicine.png';
+import homeopathy from '../assets/Pictures/homeopathy.png';
+import healthessential from '../assets/Pictures/healthessential.png';
+import covidessential from '../assets/Pictures/covidessential.png';
+import sanitizer from '../assets/Pictures/sanitizer.png';
+import womenscare from '../assets/Pictures/womenscare.png';
+import immunitybooster from '../assets/Pictures/immunitybooster.png';
+import everydayneeds from '../assets/Pictures/everydayneeds.png';
+import others from '../assets/Pictures/others.png';
 
 const {width, height} = Dimensions.get('window');
 //const [alignItems, setAlignItems] = useState("stretch");
@@ -28,6 +38,106 @@ export default MerchantCategory = ({navigation}) =>  {
             <View style={styles.Body}>
                 <View style={styles.BodyLayout}>
                     <LinearGradient colors={['#EDA8AE', '#fff' ]} style={styles.linearGradientBody}>
+
+                    <View style={{ flexDirection: 'row', height:'20%',padding:10,paddingTop:15}}>  
+              <TouchableOpacity style={{alignItems:'center',justifyContent:'center',backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View>
+              <Image source={Ayur} style={styles.ayurveda}/>
+              </View>
+              <View>
+              <Text style={{textAlign:'right', marginLeft:'20%',justifyContent:'center',top:'-130%'}}> Ayurveda</Text>
+              </View> 
+              </TouchableOpacity>
+              <TouchableOpacity style={{alignItems:'center',justifyContent:'center',backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View>
+              <Image source={medicine} style={styles.ayurveda}/>
+              </View>
+              <View >
+              <Text style={{textAlignVertical: 'center', textAlign: 'right',top:'-130%',marginLeft:'20%'}}> Medicines</Text>
+              </View>
+              </TouchableOpacity>
+          </View>
+
+              <View style={{flexDirection: 'row',height:'20%',padding:10}}>
+                  <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+                  <View>
+              <Image source={homeopathy} style={styles.ayurveda}/>
+              </View>
+              <View >
+              <Text style={{ textAlignVertical: 'center', textAlign: 'center',marginLeft:'20%',top:'-130%'}}> Homeopathy</Text>
+              </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View>
+              <Image source={healthessential} style={styles.ayurveda}/>
+              </View>
+              <View>
+              <Text style={{textAlignVertical: 'center', textAlign: 'center',marginLeft:'30%',top:'-130%' }}>Health Essentials</Text>
+              </View>
+              </TouchableOpacity>
+              </View>
+              
+              <View style={{flexDirection: 'row',height:'20%',padding:10}}>
+              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View>
+              <Image source={covidessential} style={styles.ayurveda}/>
+              </View>
+              <View >
+              <Text style={{ textAlignVertical: 'center', textAlign: 'center',marginLeft:'30%',top:'-130%'}}>Covid Essentials</Text>
+              </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View>
+              <Image source={sanitizer} style={styles.ayurveda}/>
+              </View>
+              <View>
+              <Text style={{textAlignVertical: 'center', textAlign: 'center',marginLeft:'13%',top:'-80%'}}>Sanitizers & Handwash</Text>
+              </View>
+              </TouchableOpacity>
+              
+          
+              </View>
+              <View style={{flexDirection: 'row',height:'20%',padding:10}}>
+                  <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+                  <View>
+              <Image source={womenscare} style={styles.ayurveda}/>
+              </View>
+              <View>
+              <Text style={{ textAlignVertical: 'center', textAlign: 'center',marginLeft:'20%',top:'-130%'}}>Women care</Text>
+              </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View>
+              <Image source={immunitybooster} style={styles.ayurveda}/>
+              </View>
+              <View>
+              <Text style={{textAlignVertical: 'center', textAlign: 'center',marginLeft:'30%',top:'-130%'}}>Immunity Booster</Text>
+              </View>
+              </TouchableOpacity>
+              
+          
+              </View>
+              <View style={{flexDirection: 'row',height:'20%',padding:10}}>
+                  <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+                  <View>
+              <Image source={everydayneeds} style={styles.ayurveda}/>
+              </View>
+              <View>
+              <Text style={{ textAlignVertical: 'center', textAlign: 'center',marginLeft:'25%',top:'-130%'}}> Everyday Needs</Text>
+              </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <View>
+              <Image source={others} style={styles.ayurveda}/>
+              </View>
+              <View>
+              <Text style={{textAlignVertical: 'center', textAlign: 'center',marginLeft:'20%',top:'-130%'}}>Others</Text>
+              </View>
+              </TouchableOpacity>
+              
+          
+              </View>
+                   
                     </LinearGradient>
                 </View>
             </View>
@@ -84,17 +194,18 @@ export default MerchantCategory = ({navigation}) =>  {
         
     },
     BodyLayout: {
-        // marginLeft:'10%',
-        // marginRight:'10%',
-        top:'-10%',
-        // backgroundColor:'#00747BCF',
-        height:'100%',
-        width:'90%',
-        borderTopLeftRadius:26,
-        borderTopRightRadius:26,
-        alignSelf:'center'
-
-    },
+        
+            // marginLeft:'10%',
+            // marginRight:'10%',
+            top:'-10%',
+            // backgroundColor:'#00747BCF',
+            height:'110%',
+            width:'97%',
+            borderTopLeftRadius:26,
+            borderTopRightRadius:26,
+            alignSelf:'center'
+    
+        },
     Tail: {
       height:'10%',
       width: '100%',
@@ -115,6 +226,10 @@ export default MerchantCategory = ({navigation}) =>  {
       top:5,
       flexDirection:'row',
   },
+  ayurveda:{
+    marginLeft:'-40%',
+    marginTop:'10%',
+},
         
   })
 

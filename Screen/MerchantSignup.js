@@ -5,8 +5,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import {LinearGradient} from 'expo-linear-gradient';
 import { TextInput } from 'react-native-paper';
 import { useState } from "react";
-// import CheckBox from '@react-native-community/checkbox';
+import CheckBox from '@react-native-community/checkbox'
 const {width, height} = Dimensions.get('window');
+
+
+
+
 
 export default CustomerSignUp = ({navigation}) =>  {
     const [Name,setName] = React.useState("");
@@ -15,7 +19,10 @@ export default CustomerSignUp = ({navigation}) =>  {
     const [Password,setPassword] = React.useState("");
     const [Aadhar,setAadhar] = React.useState("");
     const [Contact,setContact] = React.useState("");
-    const [toggleCheckBox, setToggleCheckBox] = useState(false);
+    const [isSelected, setToggleCheckBox] = useState(false);
+    const [setSelection, setChecked] = useState(true);
+    
+
     return (
         <LinearGradient colors={['#FFB6C1', '#FFFFFF' ]} style={styles.linearGradient}> 
         <SafeAreaView>
@@ -54,9 +61,20 @@ export default CustomerSignUp = ({navigation}) =>  {
                 value={Contact}
                 onChangeText={Contact => setContact(Contact)}/>
             </View>
+     
             <View style={styles.terms}>
+      
+            {/* <View style={styles.checkboxContainer}>
+        <CheckBox
+          value={isSelected}
+          onValueChange={setSelection}
+          style={styles.checkbox}
+        /> */}
+     
             <Text>I agree with the terms and conditions</Text>
             </View>
+           
+            {/* </View> */}
             <TouchableOpacity onPress={() => navigation.navigate('MerchantLogin')}>
             <View style={styles.SignupRect} >
                 <Text style={{fontSize:19, color:'#FFFFFF'}}>SignUp</Text>
@@ -92,13 +110,14 @@ const styles =StyleSheet.create({
     },
 
     textinput:{
-        width: '90%',
+        width: '100%',
         height: 70,
         borderRadius: 22,
-        margin:5,
+        margin:1,
     },
 
     terms:{
+        left:'5%',
         justifyContent:'center',
         alignItems:'center',
         height:30, 
@@ -114,5 +133,7 @@ const styles =StyleSheet.create({
         alignItems:'center',
         justifyContent:'center'
     },
+   
+
 
 })
