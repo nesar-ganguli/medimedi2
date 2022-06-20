@@ -30,16 +30,18 @@ export default HomeScreen = ({navigation}) =>  {
                 <LinearGradient colors={['#00747BCF', '#fff' ]} style={styles.linearGradient}>
                 <View style={styles.HeaderFlex}>
                     <View style={{alignItems:'flex-end'}}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('CustomerCart')}>
                             <Image source={Cart} />
                         </TouchableOpacity>
                     </View>
+                    <TouchableOpacity onPress={() => navigation.navigate('CustomerSearch')}>
                     <Searchbar
                         placeholder="Search"
                         onChangeText={onChangeSearch}
                         value={searchQuery}   
                         style= {styles.Search}    
                     />
+                    </TouchableOpacity>
                 </View>
                 </LinearGradient>
             </View>

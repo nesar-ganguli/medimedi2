@@ -18,6 +18,10 @@ import CategoryScreen from './Screen/CategoryScreen';
 import MerchantCategory from './Screen/MerchantCategory';
 import MerchantOrders from './Screen/MerchantOrders';
 import MerchantProfile from './Screen/MerchantProfile';
+import EditProfileScreen from './Screen/EditProfileScreen';
+import CustomerCart from './Screen/CustomerCart';
+import CustomerSearch from './Screen/CustomerSearch';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +45,9 @@ export default function App() {
         <Stack.Screen name="MerchantCategory" component={MerchantCategory} options={{headerShown:false}} />
         <Stack.Screen name="MerchantOrders" component={MerchantOrders} options={{headerShown:false}} />
         <Stack.Screen name="MerchantProfile" component={MerchantProfile} options={{headerShown:false}} />
+        <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} options={{headerShown:false}} />
+        <Stack.Screen name="CustomerCart" component={CustomerCart} options={{headerShown:false}} />
+        <Stack.Screen name="CustomerSearch" component={CustomerSearch} options={{headerShown:false}} />
 
       </Stack.Navigator>
     </NavigationContainer>
