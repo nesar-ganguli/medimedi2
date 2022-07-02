@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Text, Image,FlatList } from "react-native"
+import { StyleSheet, View, Text, Image,FlatList,Alert } from "react-native"
 import { Dimensions, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {LinearGradient} from 'expo-linear-gradient';
@@ -20,23 +20,318 @@ import IconM from 'react-native-vector-icons/MaterialIcons';
 import IconF from 'react-native-vector-icons/FontAwesome5';
 import IconF5 from 'react-native-vector-icons/FontAwesome5';
 import IconA from 'react-native-vector-icons/AntDesign';
+import ipCon from '../ipConfig.json';
 
 import { useState,useEffect } from 'react';
 
 export default WishlistScreen  = ({navigation}) =>  {
     const [searchQuery, setSearchQuery] = React.useState('');
     const onChangeSearch = query => setSearchQuery(query);
-    const [data, setData] = useState();
-
+    const [data, setData] = useState([]);
+    const [dataAva, setDataAva] = useState([]);
+    const [storeConst, setstoreConst] = useState("");
+   
     const fetchData= async()=>{
-        const response = await fetch('https://raw.githubusercontent.com/Hardeepcoder/fake_json/master/Users');
+        const response = await fetch(ipCon.ip+"/wishlist");
+        // const response = await fetch('https://raw.githubusercontent.com/Hardeepcoder/fake_json/master/Users');
+        
         const users = await response.json();
+        if(users)
         setData(users);
+    }
+
+    const fetchAvailable= async()=>{
+        const responseAva = await fetch(ipCon.ip+"/wishlistAvailable");
+        const wishAva = await responseAva.json();
+        if(wishAva) setDataAva(wishAva);
+        console.log("first")
     
     }
+    const addToCart2 = async (med,store) => {
+        //adding to cart
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ Name:med,Store:store})
+        };
+        try {
+            await fetch(
+               ipCon.ip+'/sameCart', requestOptions)
+               .then(res => {
+                   // console.log(res)
+                   res.json()
+                       .then(data => {
+                           
+                           // props.navigation.replace('CustomerLogin')
+                           console.log("data")
+                           const response = data.Msg;
+                           let row = data.Rows;
+                            console.log(response);
+                            console.log(row);
+                            if(response === "Added to cart"){
+                                alert("Added to cart")
+                            }
+                            
+                            setDataAva(data.Rows);
+                       });
+               })
+               
+       }
+       catch (error) {
+           console.error(error);
+       }
+    }
+
+    const simplyaddtocart = async (med,store) => {
+        //adding to cart
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ Name:med,Store:store})
+        };
+        try {
+            console.log("inside")
+            await fetch(
+               ipCon.ip+'/sameCart', requestOptions)
+               .then(res => {
+                   // console.log(res)
+                   res.json()
+                       .then(data1 => {
+                           
+                           // props.navigation.replace('CustomerLogin')
+                           console.log("data")
+                           const response = data1.Msg;
+                           let row = data1.Rows;
+                            console.log(response);
+                            console.log(row);
+                            if(response === "Added to cart"){
+                                alert("Added to cart")
+                            }
+                            
+                            setDataAva(data1.Rows);
+                       });
+               })
+               
+       }
+       catch (error) {
+           console.error(error);
+       }
+    }
+    
+
+    const addToCart = async (med,store) => {
+        console.log(med)
+        console.log(store)
+        //checking if same store
+        try{
+            await fetch(
+                ipCon.ip+'/cart')
+                .then(res => {
+                    // console.log(res)
+                    res.json()
+                        .then(data => {
+                            console.log(data.Msg)
+                            const msg = data.Msg
+                            if(msg === "Null"){
+                                addToCart2(med,store);
+                                
+                            }
+                            else{
+                                var response = data.Rows[0].StoreName;
+                            
+                                console.log("res")
+                                console.log(response);
+                                console.log(med);
+                                if(response !== store ){
+                                 
+
+                                 Alert.alert(
+                                    'Replace Cart Items?',
+                                    "Your cart contians medicines from "+response+". Do you want to discard the selection and add medicines from "+store+ "?",
+                                    [
+                                      { text: 'Cancel', onPress: () => { }, style: 'cancel' },
+                                      {
+                                        text: 'OK', onPress: async () => {
+                                          //Filter Data 
+                                          const requestOptions = {
+                                              method: 'POST',
+                                              headers: { 'Content-Type': 'application/json' },
+                                              body: JSON.stringify({ Name:med,Store:store})
+                                          };
+                                          try {
+                                                    await fetch(
+                                                       ipCon.ip+'/wishlistToCart', requestOptions)
+                                                       .then(res => {
+                                                           // console.log(res)
+                                                           res.json()
+                                                               .then(data => {
+                                                                   
+                                                                   // props.navigation.replace('CustomerLogin')
+                                                                   console.log("data")
+                                                                   const response = data.Msg;
+                                                                   let row = data.Rows;
+                                                                    console.log(response);
+                                                                    console.log(row);
+                                                                    if(response === "Added to cart"){
+                                                                        alert("Added to cart")
+                                                                    }
+                                                                    
+                                                                    setDataAva(data.Rows);
+                                                               });
+                                                       })
+                                                       
+                                               }
+                                               catch (error) {
+                                                   console.error(error);
+                                               }
+                                        }
+                                    },
+                                  ])
+                                 
+                                }
+                                else{
+                                    addToCart2(med,store)
+
+                                }
+                             
+                            //  setDataAva(data.Rows);
+                            }
+                        });
+                })
+
+        }
+        catch (error) {
+           console.error(error);
+        }
+        //adding to cart
+    //     const requestOptions = {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({ Name:med,Store:store})
+    //     };
+    //     try {
+    //         await fetch(
+    //            ipCon.ip+'/wishlistToCart', requestOptions)
+    //            .then(res => {
+    //                // console.log(res)
+    //                res.json()
+    //                    .then(data => {
+                           
+    //                        // props.navigation.replace('CustomerLogin')
+    //                        console.log("data")
+    //                        const response = data.Msg;
+    //                        let row = data.Rows;
+    //                         console.log(response);
+    //                         console.log(row);
+    //                         if(response === "Added to cart"){
+    //                             alert("Added to cart")
+    //                         }
+                            
+    //                         setDataAva(data.Rows);
+    //                    });
+    //            })
+               
+    //    }
+    //    catch (error) {
+    //        console.error(error);
+    //    }
+    }
+
+    const deleteAva = async (med) => {
+     
+        Alert.alert(
+          'Are You Sure Want To Remove Item ' + med.toUpperCase() + ' from your WishList',
+          'Select Below Options',
+          [
+            { text: 'Cancel', onPress: () => { }, style: 'cancel' },
+            {
+              text: 'OK', onPress: async () => {
+                //Filter Data 
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ Name:med})
+                };
+                try {
+                     await fetch(
+                        ipCon.ip+'/delAva', requestOptions)
+                        .then(res => {
+                            // console.log(res)
+                            res.json()
+                                .then(data => {
+                                    
+                                    // props.navigation.replace('CustomerLogin')
+                                    console.log("data")
+                                    console.log(data)
+                                    setDataAva(data);
+                                });
+                        })
+                        
+                }
+                catch (error) {
+                    console.error(error);
+                }
+                
+                
+              }
+            },
+          ])
+        
+      }
+
+    const deleteSelectedElement = async (med) => {
+     
+        Alert.alert(
+          'Are You Sure Want To Remove Item ' + med.toUpperCase() + ' from your WishList',
+          'Select Below Options',
+          [
+            { text: 'Cancel', onPress: () => { }, style: 'cancel' },
+            {
+              text: 'OK', onPress: async () => {
+                //Filter Data 
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ Name:med})
+                };
+                try {
+                     await fetch(
+                        ipCon.ip+'/wishlistDelete', requestOptions)
+                        .then(res => {
+                            // console.log(res)
+                            res.json()
+                                .then(data => {
+                                    
+                                    // props.navigation.replace('CustomerLogin')
+                                    console.log("data")
+                                    console.log(data)
+                                    setData(data);
+                                });
+                        })
+                        
+                }
+                catch (error) {
+                    console.error(error);
+                }
+                
+                
+              }
+            },
+          ])
+        
+      }
+
     useEffect(() => {
         fetchData();
-      });
+        fetchAvailable();
+      }, []);
+
+    //   useEffect(() => {
+    //     fetchData();
+    //   });
+
+   
     
 
     return (
@@ -46,49 +341,83 @@ export default WishlistScreen  = ({navigation}) =>  {
                 <View style={styles.Header}>
                     <LinearGradient colors={['#00747BCF', '#fff' ]} style={styles.linearGradient}>
                         <View style={styles.HeaderFlex}>
-                            <Text style={{fontSize:35, top:'20%', paddingLeft:'5%'  }}>Wishlist</Text>
+                            <Text style={{fontSize:35, top:'20%', paddingLeft:'3%'  }}>Wishlist</Text>
+                            <TouchableOpacity style={{top:'17%' }} onPress={() => navigation.navigate('AddToWishScreen')}>
+                            <Text style={{fontSize:50, paddingLeft:'3%'}}>(+)</Text>
+                            </TouchableOpacity>
                         </View>
                     </LinearGradient>
                 </View>
             <View style={styles.Body}>
                 <View style={styles.BodyLayout}>
                     <LinearGradient colors={['rgba(0, 114, 121, 0.61)', '#fff' ]} style={styles.linearGradientBody}>
+                        
+                        <Text style={{fontSize:24,marginLeft:5}}>Not Available</Text>
                         <FlatList
                             data={data}
-                            keyExtractor={(item,index) => index.toString()}
+                            // keyExtractor={(item,index) => index.toString()}
+                            keyExtractor={(item) => item.Medicine}
                             renderItem={({item}) =>
 
-                            <View style={{backgroundColor:'rgba(119, 180, 185, 0.8)',padding:5,marginBottom:3}}>
-                                <View style={{flex:0.2,alignItems:'flex-end'}}>
-                                    <TouchableOpacity>
-                                        <IconI size={24} color="black" name="heart" />
+                            <View style={{backgroundColor:'rgba(119, 180, 185, 0.8)',padding:10,marginBottom:3,flexDirection:'row'}}>
+                                <View style={{flex:.8,alignItems:'flex-end',flexDirection:'row',justifyContent:'center'}}>
+                                <Text style={{color:'#fff', fontWeight:'bold',alignSelf:'center', fontSize:24}}>{item.Medicine}</Text>
+                                </View>
+                                <View style={{flex:.2}}>
+                                    <TouchableOpacity style ={{alignSelf:'flex-end',justifyContent:'flex-end'}} onPress={() => deleteSelectedElement(item.Medicine)}>
+                                        <IconI size={26} color="black" name="heart" />
                                     </TouchableOpacity>
                                 </View>
-                                <View style={{flex:0.8,flexDirection:'row'}}>
-                                    <View style={{padding:5,flex:0.4}}>
-                                    <Text style={{color:'#fff', fontWeight:'bold'}}>{item.name}</Text>
-                                    </View>
-                                    <View style={{padding:5, flexDirection:'column',flex:0.7}}>
-                                        <Text style={{color:'#fff', fontWeight:'bold',alignSelf:'stretch'}}>{item.name}</Text>
-                                        <Text style={{color:'#fff',alignSelf:'stretch'}}>{item.email}</Text>
-                                        <Text>City: {item.address.city}</Text>
-                                    </View>
-                                    <View style={{padding:5,flex:0.3, alignItems:'flex-end',justifyContent:'flex-end'}}>
-                                    <View style={{ borderRadius:50,height:'50%', width:'80%', alignItems:'center',justifyContent:'center', borderWidth:1,borderColor:'black'}}>
-                                        <Text style={{color:'rgba(0, 116, 123, 1)'}}>+ Add</Text>
-                                    </View>
-                                    </View>
-                                </View>
-                                
-                                {/* <Text style={{color:'#fff', fontWeight:'bold'}}>{item.name}</Text>
-                                <Text style={{color:'#fff'}}>{item.email}</Text>
-                                <Text>City: {item.address.city}</Text> */}
-                                
-                                </View>
+                            </View>
 
                             }
 
                         />
+                        <Text style={{fontSize:24,marginLeft:5}}>Available</Text>
+                        <FlatList
+                            data={dataAva}
+                            // keyExtractor={(item,index) => index.toString()}
+                            keyExtractor={(item) => item.Medicine}
+                            renderItem={({item}) =>
+                            <View style={{backgroundColor:'rgba(119, 180, 185, 0.8)',padding:10,marginBottom:1,flexDirection:'row'}}>
+                                <View style={{flex:.7,alignItems:'flex-end',flexDirection:'column',justifyContent:'center'}}>
+                                <Text style={{color:'#fff', fontWeight:'bold',alignSelf:'center', fontSize:20}}>{item.Medicine}</Text>
+                                    <Text style={{color:'#fff', fontWeight:'bold',alignSelf:'center', fontSize:20}}>{item.StoreName}</Text>
+                                </View>
+                                
+                                <TouchableOpacity onPress={() => addToCart(item.Medicine,item.StoreName)} style={{flex:.2, alignItems:'center',justifyContent:'center'}}>
+                                    <View style={{ width:'70%', borderRadius:24, borderWidth:1,borderColor:'grey',padding:3}}>
+                                    <Text style={{color:'rgba(0, 116, 123, 1)',alignSelf:"center"}}>+ Add</Text>
+                                    </View>
+                                </TouchableOpacity>
+                                
+                                <View style={{flex:.1}}>
+                                    <TouchableOpacity style ={{alignSelf:'flex-end',justifyContent:'flex-end'}} onPress={() => deleteAva(item.Medicine)}>
+                                        <IconI size={26} color="black" name="heart" />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                            // <View style={{backgroundColor:'rgba(119, 180, 185, 0.8)',flexDirection:'row'}}>
+                            //     <View style={{flex:.7,alignItems:'center',justifyContent:'flex-start',flexDirection:'column'}}>
+                            //     <Text style={{color:'#fff', fontWeight:'bold',alignSelf:'center', fontSize:20}}>{item.Medicine}</Text>
+                            //     <Text style={{color:'#fff', fontWeight:'bold',alignSelf:'center', fontSize:20}}>{item.StoreName}</Text>
+                            //     </View>
+                            //     <View style={{flex:.2, alignItems:'center',justifyContent:'center'}}>
+                            //         <TouchableOpacity onPress={() => addToCart(item.Medicine,item.StoreName)} style={{ borderRadius:24,height:'40%', width:'100%', alignItems:'center',justifyContent:'center', borderWidth:1,borderColor:'grey'}}>
+                            //         <Text style={{color:'rgba(0, 116, 123, 1)',alignSelf:"center"}}>+ Add</Text>
+                            //         </TouchableOpacity>
+                                    
+                            //     </View>
+                            //     <View style={{flex:.1}}>
+                            //         <TouchableOpacity style ={{alignSelf:'flex-end',justifyContent:'flex-end'}} onPress={() => deleteSelectedElement(item.Medicine)}>
+                            //             <IconI size={26} color="black" name="heart" />
+                            //         </TouchableOpacity>
+                            //     </View>
+                            // </View>
+
+                            }
+
+                        /> 
                     </LinearGradient>
                 </View>
             </View>
@@ -178,9 +507,10 @@ const styles =StyleSheet.create({
     },
     HeaderFlex: {
         flex:1,
-        flexDirection:'column',
+        flexDirection:'row',
         padding:'3%',
-        
+        alignContent:'center',
+        // justifyContent:'center'
     },
     box: {
         width: '33.33%',

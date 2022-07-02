@@ -20,7 +20,16 @@ import MerchantOrders from './Screen/MerchantOrders';
 import MerchantProfile from './Screen/MerchantProfile';
 import EditProfileScreen from './Screen/EditProfileScreen';
 import AddToWishScreen from './Screen/AddToWishScreen';
-
+import CustomerCart from './Screen/CustomerCart';
+import CustomerSearch from './Screen/CustomerSearch';
+import PlacedOrder from './Screen/PlacedOrder';
+import Order from './Screen/Order';
+import medicalCategory from './Screen/medicalCategory';
+import SeparateOrders from './Screen/SeparateOrders';
+import medicineByStore from './Screen/medicineByStore';
+import InsertMed from './Screen/InsertMed';
+import UpdateMed from './Screen/UpdateMed';
+import FilterCategory from './Screen/FilterCategory';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -45,6 +54,16 @@ export default function App() {
         <Stack.Screen name="MerchantOrders" component={MerchantOrders} options={{headerShown:false}} />
         <Stack.Screen name="MerchantProfile" component={MerchantProfile} options={{headerShown:false}} />
         <Stack.Screen name="AddToWishScreen" component={AddToWishScreen} options={{headerShown:false}} />
+        <Stack.Screen name="CustomerCart" component={CustomerCart} options={{headerShown:false}} />
+        <Stack.Screen name="CustomerSearch" component={CustomerSearch} options={{headerShown:false}} />
+        <Stack.Screen name="PlacedOrder" component={PlacedOrder} options={{headerShown:false}} />
+        <Stack.Screen name="Order" component={Order} options={{headerShown:false}} />
+        <Stack.Screen name="medicalCategory" component={medicalCategory} options={{headerShown:false}} />
+        <Stack.Screen name="SeparateOrders" component={SeparateOrders} options={{headerShown:false}} />
+        <Stack.Screen name="medicineByStore" component={medicineByStore} options={{headerShown:false}} />
+        <Stack.Screen name="InsertMed" component={InsertMed} options={{headerShown:false}} />
+        <Stack.Screen name="UpdateMed" component={UpdateMed} options={{headerShown:false}} />
+        <Stack.Screen name="FilterCategory" component={FilterCategory} options={{headerShown:false}} />
 
       </Stack.Navigator>
     </NavigationContainer>

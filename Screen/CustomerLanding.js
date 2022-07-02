@@ -26,10 +26,10 @@ export default CustomerLanding = ({navigation}) =>  {
                     </View>
              </TouchableOpacity>
              <TouchableOpacity onPress={() => navigation.navigate('MerchantLogin')}>
-                < Text style={{fontSize:18, top:height/2, left:width/3.5,}}>Are you a seller? </Text>
+                < Text style={{fontSize:18, top:height/2, left:width/2.7,}}>Are you a seller? </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('MerchantSignup')}>
-                  <Text style={{fontSize:18, top:height/2, left:width/3.5, padding:15}}>Register Now</Text>
+                  <Text style={{fontSize:18, top:height/2, left:width/2.85, padding:15}}>Register Now</Text>
                 </TouchableOpacity>
             </SafeAreaView>
         </LinearGradient>
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         height: 40,
         borderRadius: 22,
         top:height/3,
-        left:width/3.3,
+        left:width/3.5,
         alignItems:'center',
         justifyContent:'center'
       },
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         height: 40,
         borderRadius: 22,
         top:height/2.75,
-        left:width/3.3,
+        left:width/3.5,
         alignItems:'center',
         justifyContent:'center'
       },

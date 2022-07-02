@@ -14,23 +14,31 @@ import IconO from 'react-native-vector-icons/Octicons';
 import { useEffect } from 'react';
 import ipCon from '../ipConfig.json';
 import AsyncStorage  from '@react-native-async-storage/async-storage';
+const {width, height} = Dimensions.get('window');
 //const [alignItems, setAlignItems] = useState("stretch");
-export default MerchantOrders = ({navigation}) =>  {
+export default MerchantOrders = ({navigation,route}) =>  {
     const [data, setData] = useState();
     const [store, setStore] = useState();
+    const [user, setUser] = useState();
+    
     const fetchOrders = async (props) => {
-        const c = await AsyncStorage.getItem('Store');  
-        console.log(c);
-        setStore(c);
+        const c  = route.params.Username;
+        console.log(c)
+        setUser(c)
+
+
+        const s = await AsyncStorage.getItem('Store');  
+        console.log(s);
+        setStore(s);
         
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ Store:c})
+            body: JSON.stringify({ Username:c,Store:s})
         };
         try {
             await fetch(
-                ipCon.ip+"/fecthOrdersMerchant", requestOptions)
+                ipCon.ip+"/fetchSeparateOrder", requestOptions)
                 .then(res => {
                     res.json()
                         .then(data => {
@@ -60,7 +68,8 @@ export default MerchantOrders = ({navigation}) =>  {
             <View style={styles.Header}>
                     <LinearGradient colors={['#EDA8AE', '#fff' ]} style={styles.linearGradient}>
                         <View style={styles.HeaderFlex}>
-                            <Text style={{fontSize:35, top:'20%', paddingLeft:'5%'  }}>Orders</Text>
+                            <Text style={{fontSize:35, top:'20%', paddingLeft:'5%'  }}>{user}'s Orders</Text>
+                            
                         </View>
                     </LinearGradient>
                 </View>
@@ -70,53 +79,32 @@ export default MerchantOrders = ({navigation}) =>  {
                     <FlatList
                             data={data}
                             // keyExtractor={(item,index) => index.toString()}
-                            keyExtractor={(item) => item.Username}
+                            keyExtractor={(item) => item.Medicine}
                             renderItem={({item, index}) =>
 
-                            <TouchableOpacity onPress={() => navigation.navigate('SeparateOrders',{Username:item.Username})} style={{padding:5,marginBottom:3, borderColor:'grey', borderWidth:1, flexDirection:'row'}}>
-                                
-                               
-                                
-                                    <View style={{padding:2,flex:0.6, alignItems:'center', justifyContent:'center',flexDirection:'column'}}>
-                                        <Text style={{color:'black', fontWeight:'bold',fontSize:20}}>{item.Username}</Text>
-                                        <View style={{ borderRadius:50,padding:3, width:'60%', alignItems:'center',justifyContent:'center', borderWidth:1,borderColor:'grey'}}>
-                                            <Text style={{color:'rgba(14, 52, 255, 1))', fontSize:12}} >Incoming</Text>
-                                        </View>
+                            <TouchableOpacity onPress={() => navigation.navigate('SeparateOrders')} style={{padding:5,marginBottom:3, borderColor:'grey', borderWidth:1, flexDirection:'row'}}>
+  
+                                    <View style={{padding:2,flex:1, alignItems:'flex-start', justifyContent:'center',flexDirection:'column'}}>
+                                        <Text style={{color:'black', fontWeight:'bold'}}>{item.Qty} x {item.Medicine}</Text>
+                                       
                                     </View>
-                                    <View style={{padding:5,flex:0.4, flexDirection:'column', alignItems:'center',justifyContent:'center'}}>
-                                        <Text style={{color:'black', fontSize:15, fontWeight:'500'}}>Reservation TimeOut</Text>
-                                        <Text style={{color:'black', fontSize:15, fontWeight:'500'}}>{item.Time}</Text>
-                                        {/* <View style={{ borderRadius:10,padding:5, width:'80%', alignItems:'center',justifyContent:'center', borderWidth:1,borderColor:'grey'}}>
-                                            <Text style={{color:'black', fontSize:15}} >28:57</Text>
-                                        </View> */}
-                                    </View>
-                                    {/* <View style={{padding:5, flexDirection:'column',flex:0.7}}>
-                                        <Text style={{color:'#fff', fontWeight:'bold',alignSelf:'stretch'}}>{item.name}</Text>
-                                        <Text style={{color:'#fff',alignSelf:'stretch'}}>{item.email}</Text>
-                                        <Text>City: {item.address.city}</Text>
-                                    </View>
-                                    <View style={{padding:5,flex:0.3, alignItems:'flex-end',justifyContent:'flex-end'}}>
-                                        <TouchableOpacity style ={{borderRadius:50,height:'80%', width:'80%',}} onPress={() => deleteSelectedElement(item.name)}>
-                                            <View style={{ borderRadius:50, alignItems:'center',justifyContent:'center', borderWidth:1,borderColor:'black'}}>
-                                                <Text style={{color:'rgba(0, 116, 123, 1)'}} >+ Add</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                    </View> */}
-                                
-                                
-                                {/* <Text style={{color:'#fff', fontWeight:'bold'}}>{item.name}</Text>
-                                <Text style={{color:'#fff'}}>{item.email}</Text>
-                                <Text>City: {item.address.city}</Text> */}
-                                
                                 </TouchableOpacity>
+                            
+                                
 
                             }
 
                         />
+                        {/* <TouchableOpacity onPress={() => validateLogin(props)}>
+                            <View style={styles.Login} >
+                            <Text style={{fontSize:19, color:'#FFFFFF'}}>Delete</Text>
+                            </View>
+                        </TouchableOpacity> */}
+                        
                     {/* </LinearGradient> */}
                 </View>
             </View>
-              <View style={styles.Tail}>
+              {/* <View style={styles.Tail}>
                 <View style={styles.bottomNavi}>
                   <TouchableOpacity onPress={() => navigation.navigate('MerchantDashboard')}>
                       <IconI size={24} color="black" name="home-outline" />
@@ -131,7 +119,7 @@ export default MerchantOrders = ({navigation}) =>  {
                       <IconI size={24} color="black" name="person-outline" />
                   </TouchableOpacity>
                   </View>
-              </View>
+              </View> */}
               
             </SafeAreaView>
       </LinearGradient>
@@ -163,7 +151,7 @@ export default MerchantOrders = ({navigation}) =>  {
         // flex:4,
         backgroundColor:'#fff',
         // padding:'3%',
-        height:'65%',
+        height:'75%',
         width:'100%',
         
         
@@ -179,6 +167,15 @@ export default MerchantOrders = ({navigation}) =>  {
         borderTopRightRadius:26,
         alignSelf:'center'
 
+    },
+    Login:{
+        backgroundColor: "black",
+        width: width/2.25,
+        height: 50,
+        borderRadius: 22,
+        left:100,
+        alignItems:'center',
+        justifyContent:'center'
     },
     Tail: {
       height:'10%',
@@ -200,6 +197,16 @@ export default MerchantOrders = ({navigation}) =>  {
       top:5,
       flexDirection:'row',
   },
+  SignupRect:{
+    backgroundColor: "#476A7D",
+    width: width/2.25,
+    height: 50,
+    borderRadius: 22,
+    top:20,
+    left:100,
+    alignItems:'center',
+    justifyContent:'center'
+},
         
   })
 

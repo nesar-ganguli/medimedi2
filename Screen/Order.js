@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Text, Image } from "react-native"
+import { StyleSheet, View, Text, Image, FlatList,Alert,Linking } from "react-native"
 import { Dimensions, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {LinearGradient} from 'expo-linear-gradient';
@@ -22,42 +22,130 @@ import IconF5 from 'react-native-vector-icons/FontAwesome5';
 // import { AsyncStorage } from 'react-native';
 import AsyncStorage  from '@react-native-async-storage/async-storage';
 import { useState,useEffect } from 'react';
+import ipCon from '../ipConfig.json';
 
-export default ProfileScreen = ({navigation}) =>  {
+export default ProfileScreen = ({navigation, route}) =>  {
     const [searchQuery, setSearchQuery] = React.useState('');
     const [name, setName] = React.useState('');
-    const [phnum, setPhnum] = React.useState('');
+    const [store, setStore] = React.useState('');
+    const [time, setTime] = React.useState('');
+    const [actualStore, setActualStore] = React.useState('');
+    const [orderList, setOrderList] = React.useState([]);
     const onChangeSearch = query => setSearchQuery(query);
 
-    const _retrieveData = async () => {
-        try {
-            // const valueName = await AsyncStorage.getItem('name');
-            let user = await AsyncStorage.getItem('user');  
-            console.log(user)
-            let parsed = JSON.parse(user);  
-            const phnum1 = parsed.contact;
-            const name1 = parsed.name;
+    // const fetchName= async ()=>{
 
-            if (name1 !== null) {
-                
-                console.log("async",name1);
-                setName(name1);
-            }
-            if (phnum1 !== null) {
-                
-                console.log("async",phnum1);
-                setPhnum(phnum1);
-                console.log("saved ph",phnum)
-            }
-           
+    //     try{
+    //         let user = await AsyncStorage.getItem('user');  
+    //         console.log(user)
+    //         let parsed = JSON.parse(user);  
+    //         const name1 = parsed.name;
+    //         console.log("user")
+    //         console.log((name1))
+    //         setName(name1)
+    //         console.log("first")
+    //         console.log(route.params.paramKey)
+    //     } catch (error) {
+    //         // Error retrieving data
+    //         console.log(error)
+    //     }
+    // }  
+
+    // const maps= async ()=>{
+    //     console.log(store)
+    //     const actualName = store.replace(/_/g, ' ');
+    //     console.log(actualName)
+    // }
+
+    const fetchStore= async ()=>{
+
+        try{
+            setName(route.params.paramKey)
+            let st = await AsyncStorage.getItem('Store');  
+            console.log(st)
+            // let parsed = JSON.parse(st);  
+            // const name1 = parsed.name;
+            console.log("Store")
+            console.log(name)
+            setStore(st)
+            const actualName = st.replace(/_/g, ' ');
+            console.log(actualName)
+            setActualStore(actualName)
+        
         } catch (error) {
             // Error retrieving data
             console.log(error)
         }
-    }
+    }  
+    const fetchOrders= async ()=>{  
+            let user = await AsyncStorage.getItem('user'); 
+            console.log(user)
+            let parsed = JSON.parse(user);  
+            const name1 = parsed.name; 
+            // console.log(st)
+            // const actualName = st.replace(/_/g, ' ');
+            // console.log(actualName)
+            // setActualStore(actualName)
+        
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ Name:name1})
+            };
+          
+            try {
+            await fetch(
+               ipCon.ip+'/orderRetrive', requestOptions)
+               .then(res => {
+                   // console.log(res)
+                   res.json()
+                       .then(data => {
+                           console.log(data)
+                        
+                        if(data){
+                        setOrderList(data.Rows)
+                        console.log(data.Rows[0].Time)
+                        setTime(data.Rows[0].Time)
+                        console.log(orderList)
+                        }
+                       });
+               })
+               
+            }
+            catch (error) {
+                console.error(error);
+            }
+        }
+        
+    
+    // const [min, setmin] = useState(30)
+    // const [timerCount, setTimer] = useState(60)
+
+    // useEffect(() => {
+    //     if(min!==0){
+    //     let interval = setInterval(() => {
+    //     setTimer(lastTimerCount => {
+    //         lastTimerCount <= 1 && clearInterval(interval)
+    //         console.log(lastTimerCount)
+    //         if(lastTimerCount===1){
+    //             let minute = min -1;
+    //             setmin(minute)
+    //             setTimer(60)
+    //         }
+    //         return lastTimerCount - 1
+    //     })
+    //     }, 1000) //each count lasts for a second
+    //     //cleanup the interval on complete
+        
+    //     return () => clearInterval(interval)
+    // }
+    // }, []);
+
     
     useEffect(() => {
-        _retrieveData();
+        // fetchName();
+        fetchStore();
+        fetchOrders();
         
       },[]);
     
@@ -69,30 +157,17 @@ export default ProfileScreen = ({navigation}) =>  {
             <View style={styles.Header}>
                 <LinearGradient colors={['#00747BCF', '#fff' ]} style={styles.linearGradient}>
                     <View style={styles.HeaderBody}>
-                        {/* <View style={styles.ImageView}>
-                            <Image source={imageProfile} />
-                        </View>  */}
-                        {/* <View style={styles.HeaderFlex}>
-                            <Text style={{fontSize:15}}>Anupam Kumar</Text>
-                            <Text style={{fontSize:15}}>9876543210</Text>
-                        </View>
-                        <View style={styles.ImageView2}>
-                            <Image source={imageEditProfile} />
-                        </View> */}
-                        <View style={styles.ImageView}>
-                            <Image source={imageProfile} />
-                            </View> 
-                        <View style={styles.HeaderFlex}>
-                            <Text style={{fontSize:20 , color:'white'}}>{name}</Text>
-                            <Text style={{fontSize:15 , color:'white'}}>{phnum}</Text>
-                        </View>
-                        <View style={styles.ImageView2}>
-                        {/* <TouchableOpacity 
-                        // onPress={() => navigation.navigate('EditProfileScreen')}
-                        >
-                            <Image source={imageEditProfile} />
-                        </TouchableOpacity> */}
-                        </View>
+                    <View style={{ padding:10,flexDirection:'row',flex:0.2, alignItems:'flex-end',justifyContent:'flex-start' }}>
+                        <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
+                                <Text style={{fontSize:24,fontWeight:'400'}}> {'<'} </Text>
+                        </TouchableOpacity>
+                       
+                            <Text style= {{fontSize:24, fontWeight:'600',textAlign:'center'}}>Order Details</Text>
+               
+                    </View> 
+                    <View style={{flex:0.8,justifyContent:'flex-end',alignItems:'center',top:'-40%'}}>
+                        <Text style= {{fontSize:24, fontWeight:'600',textAlign:'center'}}>{actualStore}</Text>
+                    </View> 
                     </View>
                 </LinearGradient>
                 </View>
@@ -100,37 +175,29 @@ export default ProfileScreen = ({navigation}) =>  {
                 <View style={styles.BodyLayout}>
                     <LinearGradient colors={['#007279', '#fff' ]} style={styles.linearGradientBody}>
                         <View style={styles.BodyPadding}>
-                        <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity onPress={() =>navigation.navigate('Order',{paramKey: name})}>
-                            <Image source={myOrders} />
-                        </TouchableOpacity>    
-                        </View>
-                        {/* <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity>
-                            <Image source={myAdresses} />
+                        {/* <View style={styles.buttonContainer}>
+                <Button title="Map" onPress={() => {
+                    Linking.openURL(`https://www.google.com/maps/search/?api=1&query=india`)
+                }} color="" />
+            </View> */}
+                        {/* <Text>{min}:{timerCount}</Text> */}
+                        <TouchableOpacity onPress={() => {Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${actualStore}`)}} >
+                        <Text style={{fontSize:24,paddingBottom:20,fontWeight:'500'}}>Open Google Maps to navigate</Text>
                         </TouchableOpacity>
-                        </View> */}
-                        <View style={{borderBottomColor: 'black',borderBottomWidth: 1, }} />
-                        {/* <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity>
-                            <Image source={needHelp} />
-                        </TouchableOpacity>
-                        </View>
-                        <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity>
-                            <Image source={termsConditions} />
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity>
-                            <Image source={changePassword} />
-                        </TouchableOpacity>
-                        </View> */}
-                        <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity onPress={() => navigation.navigate('CustomerLogin')}>
-                            <Image source={logout} />
-                            </TouchableOpacity>
-                        </View>
+                        <Text style={{fontSize:20,fontWeight:'800'}}>Reservation TimeOut: {time}</Text>
+                        <Text style={{fontSize:20,fontWeight:'800'}}>Order List</Text>
+                        <FlatList
+                            data={orderList}
+                            keyExtractor={(item) => item.Medicine}
+                            renderItem={({item}) =>
+
+                            <View style={{padding:5,marginBottom:3}}>
+                                <Text style={{fontSize:18}}>{item.Qty} x {item.Medicine}</Text>
+                                </View>
+                            }
+                        />
+                            
+                        
                         </View>
                     </LinearGradient>
                 </View>
@@ -191,7 +258,7 @@ const styles =StyleSheet.create({
         
     },
     HeaderBody:{
-        flexDirection:'row',
+        flexDirection:'column',
         top: '4%',
         width:'100%',
         height:'100%',

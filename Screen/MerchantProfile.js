@@ -22,10 +22,28 @@ import termsConditions from '../assets/Pictures/termsConditions.png';
 import changePassword from '../assets/Pictures/changePassword.png';
 import logout from '../assets/Pictures/logout.png';
 import profileBtn from '../assets/Pictures/profileBtn.png';
-
+import AsyncStorage  from '@react-native-async-storage/async-storage';
+import { useEffect } from 'react'; 
 const {width, height} = Dimensions.get('window');
-//const [alignItems, setAlignItems] = useState("stretch");
+
+  
+
+
 export default MerchantProfile = ({navigation}) =>  {
+  const [merch,setMerch] = React.useState("");
+  const nam= async ()=>{
+    // console.log(route.params.store)
+    var c = await AsyncStorage.getItem('Merchant');  
+    
+    // c = c.replace(/_/g," ");
+    console.log(c)
+    setMerch(c)
+  }
+  
+  useEffect(() => {
+    nam();
+    
+  }, []);
     return (
             <SafeAreaView>
               <View style={styles.Header}>
@@ -34,13 +52,13 @@ export default MerchantProfile = ({navigation}) =>  {
                             <Image source={imageProfile} />
                             </View> 
                         <View style={styles.HeaderFlex}>
-                            <Text style={{fontSize:20 , color:'black'}}>Manjunatha Medicals</Text>
-                            <Text style={{fontSize:15 , color:'black'}}>69696969696969</Text>
+                            <Text style={{fontSize:20 , color:'black'}}>{merch}</Text>
+                            {/* <Text style={{fontSize:15 , color:'black'}}>69696969696969</Text> */}
                         </View>
                         <View style={styles.ImageView2}>
-                        <TouchableOpacity onPress={() => navigation.navigate('MerchantEditprofile')}>
+                        {/* <TouchableOpacity onPress={() => navigation.navigate('MerchantEditprofile')}>
                             <Image source={imageEditProfile} />
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                         </View>
                 </LinearGradient>
                 </View>
@@ -56,16 +74,17 @@ export default MerchantProfile = ({navigation}) =>  {
                     <LinearGradient colors={['#EDA8AE', '#fff' ]} style={styles.linearGradientBody}>
                         <View style={styles.BodyPadding}>
                         <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('MerchantOrders')}>
                             <Image source={myOrders} />
                         </TouchableOpacity>    
                         </View>
-                        <View style={styles.BodyItemsPadding}>
+                        <View style={{borderBottomColor: 'black',borderBottomWidth: 1, }} />
+                        {/* <View style={styles.BodyItemsPadding}>
                         <TouchableOpacity>
                             <Image source={myAdresses} />
                         </TouchableOpacity>
                         </View>
-                        <View style={{borderBottomColor: 'black',borderBottomWidth: 1, }} />
+                        
                         <View style={styles.BodyItemsPadding}>
                         <TouchableOpacity>
                             <Image source={needHelp} />
@@ -80,7 +99,7 @@ export default MerchantProfile = ({navigation}) =>  {
                         <TouchableOpacity>
                             <Image source={changePassword} />
                         </TouchableOpacity>
-                        </View>
+                        </View> */}
                         <View style={styles.BodyItemsPadding}>
                         <TouchableOpacity onPress={() => navigation.navigate('MerchantLogin')}>
                             <Image source={logout} />

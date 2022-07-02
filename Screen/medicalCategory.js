@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Text, Image } from "react-native"
+import { StyleSheet, View, Text, Image, FlatList,Alert,Linking } from "react-native"
 import { Dimensions, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {LinearGradient} from 'expo-linear-gradient';
@@ -22,45 +22,56 @@ import IconF5 from 'react-native-vector-icons/FontAwesome5';
 // import { AsyncStorage } from 'react-native';
 import AsyncStorage  from '@react-native-async-storage/async-storage';
 import { useState,useEffect } from 'react';
+import ipCon from '../ipConfig.json';
 
-export default ProfileScreen = ({navigation}) =>  {
+export default ProfileScreen = ({navigation, route}) =>  {
     const [searchQuery, setSearchQuery] = React.useState('');
     const [name, setName] = React.useState('');
-    const [phnum, setPhnum] = React.useState('');
+    const [store, setStore] = React.useState('');
+    const [cat, setCat] = React.useState('');
+    const [actualStore, setActualStore] = React.useState('');
+    const [medList, setMedList] = React.useState([]);
     const onChangeSearch = query => setSearchQuery(query);
 
-    const _retrieveData = async () => {
+    const fecthByCategory= async()=>{
+        console.log(route.params.paramsKey)
+        const c = route.params.paramsKey;
+        setCat(route.params.paramsKey)
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ Cat:c})
+        };
+      
         try {
-            // const valueName = await AsyncStorage.getItem('name');
-            let user = await AsyncStorage.getItem('user');  
-            console.log(user)
-            let parsed = JSON.parse(user);  
-            const phnum1 = parsed.contact;
-            const name1 = parsed.name;
-
-            if (name1 !== null) {
-                
-                console.log("async",name1);
-                setName(name1);
-            }
-            if (phnum1 !== null) {
-                
-                console.log("async",phnum1);
-                setPhnum(phnum1);
-                console.log("saved ph",phnum)
-            }
+        await fetch(
+           ipCon.ip+'/fetchCatMed', requestOptions)
+           .then(res => {
+               // console.log(res)
+               res.json()
+                   .then(data => {
+                       console.log(data)
+                    
+                    if(data.Msg==="No Data"){
+                        alert("No Stores.")
+                        navigation.push('CategoryScreen')
+                    }
+                    setMedList(data.Rows)
+                    console.log(data.Rows)
+                   });
+           })
            
-        } catch (error) {
-            // Error retrieving data
-            console.log(error)
         }
+        catch (error) {
+            console.error(error);
+        }
+    
     }
-    
+   
     useEffect(() => {
-        _retrieveData();
+        fecthByCategory();
         
-      },[]);
-    
+      }, []);
 
     return (
         <SafeAreaView>
@@ -69,30 +80,17 @@ export default ProfileScreen = ({navigation}) =>  {
             <View style={styles.Header}>
                 <LinearGradient colors={['#00747BCF', '#fff' ]} style={styles.linearGradient}>
                     <View style={styles.HeaderBody}>
-                        {/* <View style={styles.ImageView}>
-                            <Image source={imageProfile} />
-                        </View>  */}
-                        {/* <View style={styles.HeaderFlex}>
-                            <Text style={{fontSize:15}}>Anupam Kumar</Text>
-                            <Text style={{fontSize:15}}>9876543210</Text>
-                        </View>
-                        <View style={styles.ImageView2}>
-                            <Image source={imageEditProfile} />
-                        </View> */}
-                        <View style={styles.ImageView}>
-                            <Image source={imageProfile} />
-                            </View> 
-                        <View style={styles.HeaderFlex}>
-                            <Text style={{fontSize:20 , color:'white'}}>{name}</Text>
-                            <Text style={{fontSize:15 , color:'white'}}>{phnum}</Text>
-                        </View>
-                        <View style={styles.ImageView2}>
-                        {/* <TouchableOpacity 
-                        // onPress={() => navigation.navigate('EditProfileScreen')}
-                        >
-                            <Image source={imageEditProfile} />
-                        </TouchableOpacity> */}
-                        </View>
+                    <View style={{ padding:10,flexDirection:'row',flex:0.2, alignItems:'flex-end',justifyContent:'flex-start' }}>
+                        <TouchableOpacity onPress={() => navigation.navigate('CategoryScreen')}>
+                                <Text style={{fontSize:24,fontWeight:'400'}}> {'<'} </Text>
+                        </TouchableOpacity>
+                       
+                            <Text style= {{fontSize:24, fontWeight:'600',textAlign:'center'}}>Stores</Text>
+               
+                    </View> 
+                    <View style={{flex:0.8,justifyContent:'flex-end',alignItems:'center',top:'-40%'}}>
+                        <Text style= {{fontSize:24, fontWeight:'600',textAlign:'center'}}>{actualStore}</Text>
+                    </View> 
                     </View>
                 </LinearGradient>
                 </View>
@@ -100,59 +98,26 @@ export default ProfileScreen = ({navigation}) =>  {
                 <View style={styles.BodyLayout}>
                     <LinearGradient colors={['#007279', '#fff' ]} style={styles.linearGradientBody}>
                         <View style={styles.BodyPadding}>
-                        <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity onPress={() =>navigation.navigate('Order',{paramKey: name})}>
-                            <Image source={myOrders} />
-                        </TouchableOpacity>    
-                        </View>
-                        {/* <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity>
-                            <Image source={myAdresses} />
-                        </TouchableOpacity>
-                        </View> */}
-                        <View style={{borderBottomColor: 'black',borderBottomWidth: 1, }} />
-                        {/* <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity>
-                            <Image source={needHelp} />
-                        </TouchableOpacity>
-                        </View>
-                        <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity>
-                            <Image source={termsConditions} />
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity>
-                            <Image source={changePassword} />
-                        </TouchableOpacity>
-                        </View> */}
-                        <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity onPress={() => navigation.navigate('CustomerLogin')}>
-                            <Image source={logout} />
-                            </TouchableOpacity>
-                        </View>
+                        
+                        <FlatList
+                            data={medList}
+                            keyExtractor={(item) => item.Medicine}
+                            renderItem={({item}) =>
+
+                                <TouchableOpacity onPress={() => navigation.navigate('FilterCategory',{store:item.Medical,Cat:cat})} style={{padding:5,marginBottom:3, backgroundColor:'#93C1C6'}}>
+                                    <Text style={{fontSize:18}}>{item.Medical}</Text>
+                                    <Text style={{fontSize:13}}>Tap to View Medicines</Text>
+                                </TouchableOpacity>
+
+                            }
+                        />
+                        
                         </View>
                     </LinearGradient>
                 </View>
             </View>
             {/* </View> */}
-            <View style={styles.Tail}>
-             
-            <View style={styles.bottomNavi}>
-                <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
-                    <IconI size={24} color="black" name="home-outline" />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('WishlistScreen')}>
-                    <IconF5 size={24} color="black" name="heart"  />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
-                    <IconI size={24} color="white" name="person-outline" />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('CategoryScreen')}>
-                    <IconM size={24} color="black" name="category" />
-                </TouchableOpacity>
-                </View>
-            </View>
+            
         </View>
         </SafeAreaView>
     )
@@ -185,13 +150,13 @@ const styles =StyleSheet.create({
         // flex:4,
         backgroundColor:'#fff',
         // padding:'3%',
-        height:'65%',
+        height:'75%',
         width:'100%',
         
         
     },
     HeaderBody:{
-        flexDirection:'row',
+        flexDirection:'column',
         top: '4%',
         width:'100%',
         height:'100%',

@@ -11,36 +11,50 @@ import IconM from 'react-native-vector-icons/MaterialIcons';
 import IconF from 'react-native-vector-icons/FontAwesome5';
 import IconF5 from 'react-native-vector-icons/FontAwesome5';
 import IconO from 'react-native-vector-icons/Octicons';
+import { useEffect } from 'react';
+import AsyncStorage  from '@react-native-async-storage/async-storage';
 
-const {width, height} = Dimensions.get('window');
+
 //const [alignItems, setAlignItems] = useState("stretch");
-export default MerchantDashboard = ({navigation}) =>  {
+
+
+
+export default MerchantDashboard = ({navigation,route}) =>  {
+  const [store, setStore] = React.useState('');
+  const name= async()=>{
+    // console.log(route.params.store)
+    var c = await AsyncStorage.getItem('Store');  
+    
+    c = c.replace(/_/g," ");
+    setStore(c)
+  }
+  
+  useEffect(() => {
+    name();
+    
+  }, []);
     return (
         <LinearGradient colors={['#FFC0CB', '#FFFFFF' ]} style={styles.linearGradient}>
             <SafeAreaView>
               <View style={styles.Header}>
                 <View style={styles.loc}>
                 <IconE size={30}  name="location-pin" />
-                <Text style={{fontSize:16}}>Hebbal</Text>
+                <Text style={{fontSize:16}}>Bellandur</Text>
                 </View>
               </View>
               <View style={styles.SubHeader}>
                 <View style={styles.SH}>
               {/* <Text style={{ backgroundColor: 'red', flex: 1, textAlignVertical: 'center', textAlign: 'center' }}> ICON 1</Text> */}
-              <TouchableOpacity style={{backgroundColor:'white', width:'100%', height:'30.33%',  borderRadius:12,marginBottom:5}}>
-             
+              <TouchableOpacity style={{backgroundColor:'white', width:'100%', height:'30.33%',  borderRadius:12,marginBottom:5,alignItems:'center',justifyContent:'center'}}>
+              <Text style={{fontSize:20,fontWeight:'700'}}>{store}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{backgroundColor:'#49A8FF', width:'100%', height:'30.33%',borderRadius:12,marginBottom:5}}>
-             
+              <TouchableOpacity onPress={() => navigation.navigate('InsertMed',{store:store})} style={{backgroundColor:'#49A8FF', width:'100%', height:'30.33%',borderRadius:12,marginBottom:5,alignItems:'center',justifyContent:'center'}}>
+              <Text style={{fontSize:20,fontWeight:'300'}}>ADD TO STORE</Text>
               </TouchableOpacity>
-              <View style={{flexDirection:'row', width:'100%', height:'30.33%',borderRadius:12,marginBottom:5,justifyContent:'space-between'}}>
-              <View style={{backgroundColor:'rgba(68, 198, 73, 1)', width:'48%', height:'100%',borderRadius:12}}>
-            
-              </View>
-              <View style={{backgroundColor:'red', width:'48%', height:'100%',borderRadius:12}}>
-            
-              </View>
-              </View>
+              <TouchableOpacity onPress={() => navigation.navigate('UpdateMed',{store:store})} style={{backgroundColor:'#FF0000', width:'100%', height:'30.33%',borderRadius:12,marginBottom:5,alignItems:'center',justifyContent:'center'}}>
+              <Text style={{fontSize:20,fontWeight:'300'}}>UPDATE STOCK</Text>
+              </TouchableOpacity>
+              
               </View>
               </View>
               <View style={styles.Body}>

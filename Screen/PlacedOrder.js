@@ -10,6 +10,7 @@ import { ScrollView } from 'react-native';
 import imageEditProfile from '../assets/Pictures/imageEditProfile.png';
 import myOrders from '../assets/Pictures/myOrders.png';
 import myAdresses from '../assets/Pictures/myAdresses.png';
+import booking from '../assets/Pictures/booking.png';
 import needHelp from '../assets/Pictures/needHelp.png';
 import termsConditions from '../assets/Pictures/termsConditions.png';
 import changePassword from '../assets/Pictures/changePassword.png';
@@ -59,102 +60,34 @@ export default ProfileScreen = ({navigation}) =>  {
     useEffect(() => {
         _retrieveData();
         
-      },[]);
+      });
     
 
     return (
-        <SafeAreaView>
+        
+                <LinearGradient colors={['#00747BCF', '#fff' ]} style={styles.linearGradient}>
+                    <SafeAreaView>
         <View style={{flexDirection: "column"}}>
             {/* <View style={styles.Main}> */}
             <View style={styles.Header}>
-                <LinearGradient colors={['#00747BCF', '#fff' ]} style={styles.linearGradient}>
-                    <View style={styles.HeaderBody}>
-                        {/* <View style={styles.ImageView}>
-                            <Image source={imageProfile} />
-                        </View>  */}
-                        {/* <View style={styles.HeaderFlex}>
-                            <Text style={{fontSize:15}}>Anupam Kumar</Text>
-                            <Text style={{fontSize:15}}>9876543210</Text>
+                    
+                        <View style={{flex:0.1, padding:10}}>
+                        <TouchableOpacity onPress={() => navigation.navigate('CustomerCart')}>
+                                <Text style={{fontSize:24,fontWeight:'400'}}> {'<'} </Text>
+                          </TouchableOpacity>
                         </View>
-                        <View style={styles.ImageView2}>
-                            <Image source={imageEditProfile} />
-                        </View> */}
-                        <View style={styles.ImageView}>
-                            <Image source={imageProfile} />
-                            </View> 
-                        <View style={styles.HeaderFlex}>
-                            <Text style={{fontSize:20 , color:'white'}}>{name}</Text>
-                            <Text style={{fontSize:15 , color:'white'}}>{phnum}</Text>
+                        <View style={{flex:0.9,paddingLeft:50,paddingRight:50}}>
+                        <Image source={booking} style={styles.image1} />
+                        <Text style= {{fontSize:24, fontWeight:'600',textAlign:'center'}}>Your booking is confirmed</Text>
+                        <Text style= {{fontSize:24, fontWeight:'600',color:'rgba(211, 94, 94, 1)',textAlign:'center'}}>We will keep your booking for the next 30 mins</Text>
                         </View>
-                        <View style={styles.ImageView2}>
-                        {/* <TouchableOpacity 
-                        // onPress={() => navigation.navigate('EditProfileScreen')}
-                        >
-                            <Image source={imageEditProfile} />
-                        </TouchableOpacity> */}
-                        </View>
-                    </View>
-                </LinearGradient>
+            
                 </View>
-            <View style={styles.Body}>
-                <View style={styles.BodyLayout}>
-                    <LinearGradient colors={['#007279', '#fff' ]} style={styles.linearGradientBody}>
-                        <View style={styles.BodyPadding}>
-                        <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity onPress={() =>navigation.navigate('Order',{paramKey: name})}>
-                            <Image source={myOrders} />
-                        </TouchableOpacity>    
-                        </View>
-                        {/* <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity>
-                            <Image source={myAdresses} />
-                        </TouchableOpacity>
-                        </View> */}
-                        <View style={{borderBottomColor: 'black',borderBottomWidth: 1, }} />
-                        {/* <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity>
-                            <Image source={needHelp} />
-                        </TouchableOpacity>
-                        </View>
-                        <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity>
-                            <Image source={termsConditions} />
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity>
-                            <Image source={changePassword} />
-                        </TouchableOpacity>
-                        </View> */}
-                        <View style={styles.BodyItemsPadding}>
-                        <TouchableOpacity onPress={() => navigation.navigate('CustomerLogin')}>
-                            <Image source={logout} />
-                            </TouchableOpacity>
-                        </View>
-                        </View>
-                    </LinearGradient>
-                </View>
-            </View>
-            {/* </View> */}
-            <View style={styles.Tail}>
-             
-            <View style={styles.bottomNavi}>
-                <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
-                    <IconI size={24} color="black" name="home-outline" />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('WishlistScreen')}>
-                    <IconF5 size={24} color="black" name="heart"  />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
-                    <IconI size={24} color="white" name="person-outline" />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('CategoryScreen')}>
-                    <IconM size={24} color="black" name="category" />
-                </TouchableOpacity>
-                </View>
-            </View>
+            
         </View>
         </SafeAreaView>
+                </LinearGradient>
+        
     )
 }
 
@@ -174,7 +107,7 @@ const styles =StyleSheet.create({
     },
     Header: {
         width:'100%',
-        height:'25%',
+        height:'100%',
         //flexDirection:'row',
         // alignItems:'center',
         justifyContent:'center',
@@ -191,8 +124,8 @@ const styles =StyleSheet.create({
         
     },
     HeaderBody:{
-        flexDirection:'row',
-        top: '4%',
+        alignItems:'center',
+        justifyContent:'center',
         width:'100%',
         height:'100%',
     },
@@ -225,8 +158,8 @@ const styles =StyleSheet.create({
         marginTop:'2%',
     },
     image1: {
-    flex: 1,
-    height: null,
+    flex: .6,
+    height: '70%',
     width:'100%',
     resizeMode: 'contain',
     // flex: 1,
@@ -301,15 +234,6 @@ ImageView2: {
     justifyContent:'center',
     //backgroundColor: 'orange',
 },
-image1: {
-    flex: 1,
-    height: null,
-    width:'100%',
-    resizeMode: 'contain',
-    // flex: 1,
-    // aspectRatio: .75, 
-    // resizeMode: 'contain',
-    
-    },
+
 
 })

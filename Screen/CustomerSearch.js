@@ -1,16 +1,46 @@
 import * as React from 'react';
-import { StyleSheet, View, Text, Image } from "react-native"
+import { StyleSheet, View, Text, Image, FlatList } from "react-native"
 import { Dimensions, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {LinearGradient} from 'expo-linear-gradient';
 import { Searchbar } from 'react-native-paper';
 import Image1 from '../assets/Pictures/image1.png';
 import Cart from '../assets/Pictures/Cart.png';
-
+import ipCon from '../ipConfig.json'
 
 export default CustomerSearch = ({navigation}) =>  {
     const [searchQuery, setSearchQuery] = React.useState('');
+    const [data, setData] = React.useState();
     const onChangeSearch = query => setSearchQuery(query);
+
+    const search = async () => {
+        console.log(searchQuery)
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ Value:searchQuery})
+        };
+        try {
+            await fetch(
+                ipCon.ip+"/search", requestOptions)
+                .then(res => {
+                    res.json()
+                        .then(data => {
+                            
+                            // props.navigation.replace('CustomerLogin')
+                            console.log(data)
+                            
+                            setData(data);
+                         
+                            
+                        });
+                })
+                
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
     return (
         <SafeAreaView>
         <View style={{flexDirection: "column"}}>
@@ -24,8 +54,9 @@ export default CustomerSearch = ({navigation}) =>  {
                     </View>
                     <View>
                     <Searchbar
-                        placeholder="Search"
+                        placeholder="Search Medical Stores"
                         onChangeText={onChangeSearch}
+                        onIconPress ={search}
                         value={searchQuery}   
                         style= {styles.Search}    
                     />
@@ -34,6 +65,25 @@ export default CustomerSearch = ({navigation}) =>  {
             </View>
             <View style={styles.Body}>
                 <View style={styles.BodyLayout}>
+                <FlatList
+                            data={data}
+                            // keyExtractor={(item,index) => index.toString()}
+                            keyExtractor={(item) => item.Medical}
+                            renderItem={({item, index}) =>
+
+                            <TouchableOpacity onPress={() => navigation.navigate('medicineByStore',{store:item.Store_Name})} style={{padding:5,marginBottom:3, borderColor:'grey', borderWidth:1, flexDirection:'row'}}>
+  
+                                    <View style={{padding:10,flex:1, alignItems:'flex-start', justifyContent:'center',flexDirection:'column'}}>
+                                        <Text style={{color:'black', fontWeight:'bold'}}>{item.Store_Name}</Text>
+                                       
+                                    </View>
+                            </TouchableOpacity>
+                            
+                                
+
+                            }
+
+                        />
                     
                 </View>
             </View>
@@ -60,7 +110,7 @@ const styles =StyleSheet.create({
         flex: 1,
     },
     Back: {
-        top:'15%',
+        // top:'%',
         left : '5%',
         //padding:'15%',
         color:'black',
@@ -136,7 +186,7 @@ const styles =StyleSheet.create({
     },
     
     Search: {
-        marginTop:'-1%',
+        marginTop:'-5%',
         borderRadius:14,
         width: '93%',
         height: "55%",

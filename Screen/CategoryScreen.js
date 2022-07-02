@@ -19,7 +19,7 @@ import IconI from 'react-native-vector-icons/Ionicons';
 import IconM from 'react-native-vector-icons/MaterialIcons';
 import IconF from 'react-native-vector-icons/FontAwesome5';
 import IconF5 from 'react-native-vector-icons/FontAwesome5';
-import Ayurveda from '../assets/Pictures/Ayurveda.png';
+// import Ayurveda from '../assets/Pictures/Ayurveda.png';
 import Ayur from '../assets/Pictures/Ayur.png';
 import medicine from '../assets/Pictures/medicine.png';
 import homeopathy from '../assets/Pictures/homeopathy.png';
@@ -49,7 +49,7 @@ export default CategoryScreen = ({navigation}) =>  {
                 <View style={styles.BodyLayout}>
                     <LinearGradient colors={['#007279', '#fff' ]} style={styles.linearGradientBody}>
                     <View style={{ flexDirection: 'row', height:'20%',padding:10,paddingTop:15}}>  
-              <TouchableOpacity style={{alignItems:'center',justifyContent:'center',backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <TouchableOpacity onPress={() => navigation.navigate('medicalCategory',{paramsKey:"Ayurveda"})} style={{alignItems:'center',justifyContent:'center',backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
               <View>
               <Image source={Ayur} style={styles.ayurveda}/>
               </View>
@@ -57,7 +57,7 @@ export default CategoryScreen = ({navigation}) =>  {
               <Text style={{textAlign:'right', marginLeft:'20%',justifyContent:'center',top:'-130%'}}> Ayurveda</Text>
               </View> 
               </TouchableOpacity>
-              <TouchableOpacity style={{alignItems:'center',justifyContent:'center',backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <TouchableOpacity onPress={() => navigation.navigate('medicalCategory',{paramsKey:"Medicines"})} style={{alignItems:'center',justifyContent:'center',backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
               <View>
               <Image source={medicine} style={styles.ayurveda}/>
               </View>
@@ -68,7 +68,7 @@ export default CategoryScreen = ({navigation}) =>  {
           </View>
 
               <View style={{flexDirection: 'row',height:'20%',padding:10}}>
-                  <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+                  <TouchableOpacity onPress={() => navigation.navigate('medicalCategory',{paramsKey:"Homeopathy"})} style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
                   <View>
               <Image source={homeopathy} style={styles.ayurveda}/>
               </View>
@@ -76,7 +76,7 @@ export default CategoryScreen = ({navigation}) =>  {
               <Text style={{ textAlignVertical: 'center', textAlign: 'center',marginLeft:'20%',top:'-130%'}}> Homeopathy</Text>
               </View>
               </TouchableOpacity>
-              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <TouchableOpacity onPress={() => navigation.navigate('medicalCategory',{paramsKey:"Health Essentials"})} style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
               <View>
               <Image source={healthessential} style={styles.ayurveda}/>
               </View>
@@ -87,7 +87,7 @@ export default CategoryScreen = ({navigation}) =>  {
               </View>
               
               <View style={{flexDirection: 'row',height:'20%',padding:10}}>
-              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <TouchableOpacity onPress={() => navigation.navigate('medicalCategory',{paramsKey:"Covid Essentials"})} style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
               <View>
               <Image source={covidessential} style={styles.ayurveda}/>
               </View>
@@ -95,7 +95,7 @@ export default CategoryScreen = ({navigation}) =>  {
               <Text style={{ textAlignVertical: 'center', textAlign: 'center',marginLeft:'30%',top:'-130%'}}>Covid Essentials</Text>
               </View>
               </TouchableOpacity>
-              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <TouchableOpacity onPress={() => navigation.navigate('medicalCategory',{paramsKey:"Sanitizers and Handwash"})} style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
               <View>
               <Image source={sanitizer} style={styles.ayurveda}/>
               </View>
@@ -107,7 +107,7 @@ export default CategoryScreen = ({navigation}) =>  {
           
               </View>
               <View style={{flexDirection: 'row',height:'20%',padding:10}}>
-                  <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+                  <TouchableOpacity onPress={() => navigation.navigate('medicalCategory',{paramsKey:"Women care"})} style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
                   <View>
               <Image source={womenscare} style={styles.ayurveda}/>
               </View>
@@ -115,7 +115,7 @@ export default CategoryScreen = ({navigation}) =>  {
               <Text style={{ textAlignVertical: 'center', textAlign: 'center',marginLeft:'20%',top:'-130%'}}>Women care</Text>
               </View>
               </TouchableOpacity>
-              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <TouchableOpacity onPress={() => navigation.navigate('medicalCategory',{paramsKey:"Immunity Booster"})} style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
               <View>
               <Image source={immunitybooster} style={styles.ayurveda}/>
               </View>
@@ -127,7 +127,7 @@ export default CategoryScreen = ({navigation}) =>  {
           
               </View>
               <View style={{flexDirection: 'row',height:'20%',padding:10}}>
-                  <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+                  <TouchableOpacity onPress={() => navigation.navigate('medicalCategory',{paramsKey:"Everyday Needs"})} style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
                   <View>
               <Image source={everydayneeds} style={styles.ayurveda}/>
               </View>
@@ -135,7 +135,7 @@ export default CategoryScreen = ({navigation}) =>  {
               <Text style={{ textAlignVertical: 'center', textAlign: 'center',marginLeft:'25%',top:'-130%'}}> Everyday Needs</Text>
               </View>
               </TouchableOpacity>
-              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
+              <TouchableOpacity onPress={() => navigation.navigate('medicalCategory',{paramsKey:"Others"})} style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
               <View>
               <Image source={others} style={styles.ayurveda}/>
               </View>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Text, Image } from "react-native"
+import { StyleSheet, View, Text, Image,FlatList,Alert } from "react-native"
 import { Dimensions, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {LinearGradient} from 'expo-linear-gradient';
@@ -11,134 +11,94 @@ import IconM from 'react-native-vector-icons/MaterialIcons';
 import IconF from 'react-native-vector-icons/FontAwesome5';
 import IconF5 from 'react-native-vector-icons/FontAwesome5';
 import IconO from 'react-native-vector-icons/Octicons';
-import Ayur from '../assets/Pictures/Ayur.png';
-import medicine from '../assets/Pictures/medicine.png';
-import homeopathy from '../assets/Pictures/homeopathy.png';
-import healthessential from '../assets/Pictures/healthessential.png';
-import covidessential from '../assets/Pictures/covidessential.png';
-import sanitizer from '../assets/Pictures/sanitizer.png';
-import womenscare from '../assets/Pictures/womenscare.png';
-import immunitybooster from '../assets/Pictures/immunitybooster.png';
-import everydayneeds from '../assets/Pictures/everydayneeds.png';
-import others from '../assets/Pictures/others.png';
-
-const {width, height} = Dimensions.get('window');
+import { useEffect } from 'react';
+import ipCon from '../ipConfig.json';
+import AsyncStorage  from '@react-native-async-storage/async-storage';
 //const [alignItems, setAlignItems] = useState("stretch");
-export default MerchantCategory = ({navigation}) =>  {
+export default MerchantOrders = ({navigation}) =>  {
+    const [data, setData] = useState();
+    const [cartData, setCartData] = useState([]);
+    const [store, setStore] = useState();
+
+    const fetchMedicalStore = async (med,store) => {
+       var c = await AsyncStorage.getItem('Store'); 
+        console.log(c)
+        
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ Store: c})
+        };
+        try {
+             await fetch(
+                ipCon.ip+'/medicines', requestOptions)
+                .then(res => {
+                    // console.log(res)
+                    res.json()
+                        .then(data => {
+                            
+                            // props.navigation.replace('CustomerLogin')
+                            console.log("data")
+                            setCartData(data);
+                            
+                        });
+                })
+                
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchMedicalStore();
+      },[]);
+
     return (
-        <LinearGradient colors={['#FFC0CB', '#FFFFFF' ]} style={styles.linearGradient}>
+        <LinearGradient colors={['#EDA8AE', '#FFFFFF' ]} style={styles.linearGradient}>
             <SafeAreaView>
             <View style={styles.Header}>
                     <LinearGradient colors={['#EDA8AE', '#fff' ]} style={styles.linearGradient}>
                         <View style={styles.HeaderFlex}>
-                            <Text style={{fontSize:35, top:'20%', paddingLeft:'5%'  }}>Category</Text>
+                            <Text style={{fontSize:35, top:'20%', paddingLeft:'5%'  }}>Medicines</Text>
                         </View>
                     </LinearGradient>
                 </View>
             <View style={styles.Body}>
                 <View style={styles.BodyLayout}>
-                    <LinearGradient colors={['#EDA8AE', '#fff' ]} style={styles.linearGradientBody}>
+                    {/* <LinearGradient colors={['#EDA8AE', '#fff' ]} style={styles.linearGradientBody}> */}
+                    <FlatList
+                            data={cartData}
+                            keyExtractor={(item) => item.Medicine}
+                            renderItem={({item}) =>
 
-                    <View style={{ flexDirection: 'row', height:'20%',padding:10,paddingTop:15}}>  
-              <TouchableOpacity style={{alignItems:'center',justifyContent:'center',backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
-              <View>
-              <Image source={Ayur} style={styles.ayurveda}/>
-              </View>
-              <View>
-              <Text style={{textAlign:'right', marginLeft:'20%',justifyContent:'center',top:'-130%'}}> Ayurveda</Text>
-              </View> 
-              </TouchableOpacity>
-              <TouchableOpacity style={{alignItems:'center',justifyContent:'center',backgroundColor:'white', height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
-              <View>
-              <Image source={medicine} style={styles.ayurveda}/>
-              </View>
-              <View >
-              <Text style={{textAlignVertical: 'center', textAlign: 'right',top:'-130%',marginLeft:'20%'}}> Medicines</Text>
-              </View>
-              </TouchableOpacity>
-          </View>
-
-              <View style={{flexDirection: 'row',height:'20%',padding:10}}>
-                  <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
-                  <View>
-              <Image source={homeopathy} style={styles.ayurveda}/>
-              </View>
-              <View >
-              <Text style={{ textAlignVertical: 'center', textAlign: 'center',marginLeft:'20%',top:'-130%'}}> Homeopathy</Text>
-              </View>
-              </TouchableOpacity>
-              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
-              <View>
-              <Image source={healthessential} style={styles.ayurveda}/>
-              </View>
-              <View>
-              <Text style={{textAlignVertical: 'center', textAlign: 'center',marginLeft:'30%',top:'-130%' }}>Health Essentials</Text>
-              </View>
-              </TouchableOpacity>
-              </View>
-              
-              <View style={{flexDirection: 'row',height:'20%',padding:10}}>
-              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
-              <View>
-              <Image source={covidessential} style={styles.ayurveda}/>
-              </View>
-              <View >
-              <Text style={{ textAlignVertical: 'center', textAlign: 'center',marginLeft:'30%',top:'-130%'}}>Covid Essentials</Text>
-              </View>
-              </TouchableOpacity>
-              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
-              <View>
-              <Image source={sanitizer} style={styles.ayurveda}/>
-              </View>
-              <View>
-              <Text style={{textAlignVertical: 'center', textAlign: 'center',marginLeft:'13%',top:'-80%'}}>Sanitizers & Handwash</Text>
-              </View>
-              </TouchableOpacity>
-              
-          
-              </View>
-              <View style={{flexDirection: 'row',height:'20%',padding:10}}>
-                  <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
-                  <View>
-              <Image source={womenscare} style={styles.ayurveda}/>
-              </View>
-              <View>
-              <Text style={{ textAlignVertical: 'center', textAlign: 'center',marginLeft:'20%',top:'-130%'}}>Women care</Text>
-              </View>
-              </TouchableOpacity>
-              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
-              <View>
-              <Image source={immunitybooster} style={styles.ayurveda}/>
-              </View>
-              <View>
-              <Text style={{textAlignVertical: 'center', textAlign: 'center',marginLeft:'30%',top:'-130%'}}>Immunity Booster</Text>
-              </View>
-              </TouchableOpacity>
-              
-          
-              </View>
-              <View style={{flexDirection: 'row',height:'20%',padding:10}}>
-                  <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
-                  <View>
-              <Image source={everydayneeds} style={styles.ayurveda}/>
-              </View>
-              <View>
-              <Text style={{ textAlignVertical: 'center', textAlign: 'center',marginLeft:'25%',top:'-130%'}}> Everyday Needs</Text>
-              </View>
-              </TouchableOpacity>
-              <TouchableOpacity style={{ alignItems:'center',justifyContent:'center',backgroundColor:'white',height:'100%',width:'50%', borderRadius:12,marginRight:5,shadowColor: '#000',shadowOffset: { width: 1, height: 1 },shadowOpacity:  0.4,shadowRadius: 3,elevation: 5,}}>
-              <View>
-              <Image source={others} style={styles.ayurveda}/>
-              </View>
-              <View>
-              <Text style={{textAlignVertical: 'center', textAlign: 'center',marginLeft:'20%',top:'-130%'}}>Others</Text>
-              </View>
-              </TouchableOpacity>
-              
-          
-              </View>
-                   
-                    </LinearGradient>
+                            <View style={{backgroundColor:'#FF6C6C',padding:5,marginBottom:3}}>
+                                
+                                <View style={{flex:1,flexDirection:'row',padding:20}}>
+                                    
+                                    <View style={{padding:5, flexDirection:'column',flex:0.5,justifyContent:'center',alignItems:'flex-start'}}>
+                                        <Text style={{color:'black', fontWeight:'bold',fontSize:22}}>{item.Medicine}</Text>
+                                        {/* <Text style={{color:'black'}}>{item.StoreName}</Text> */}
+                                        <Text>Category: {item.Category}</Text>
+                                    </View>
+                                    <View style={{padding:5,flex:0.5, alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
+                                    <View style={{ padding:4,flex:0.4 ,alignItems:'flex-start',justifyContent:'flex-start',flexDirection:'row',marginRight:10}}>
+                                            <Text style={{color:'black',fontSize:18}}>Qty:{item.Qty}</Text>
+                                        
+                                    </View>
+                                    <View style={{padding:5,marginLeft:10,flex:0.4,justifyContent:'center',alignItems:'center'}}>
+                                        <Text style={{fontWeight:'500',fontSize:18}}>₹ {item.Price}</Text>
+                                    </View>
+                                    
+                                    </View>
+                                </View>
+                                {/* <Text style={{color:'#fff', fontWeight:'bold'}}>{item.name}</Text>
+                                <Text style={{color:'#fff'}}>{item.email}</Text>
+                                <Text>City: {item.address.city}</Text> */}
+                                </View>
+                            }
+                        />
+                    {/* </LinearGradient> */}
                 </View>
             </View>
               <View style={styles.Tail}>
@@ -166,8 +126,8 @@ export default MerchantCategory = ({navigation}) =>  {
   const styles =StyleSheet.create({
     linearGradientBody:{
         flex: 1,
-        borderTopRightRadius:26,
-        borderTopLeftRadius:26
+        // borderTopRightRadius:26,
+        // borderTopLeftRadius:26
     },
     linearGradient: {
         flex: 1,
@@ -194,18 +154,17 @@ export default MerchantCategory = ({navigation}) =>  {
         
     },
     BodyLayout: {
-        
-            // marginLeft:'10%',
-            // marginRight:'10%',
-            top:'-10%',
-            // backgroundColor:'#00747BCF',
-            height:'110%',
-            width:'97%',
-            borderTopLeftRadius:26,
-            borderTopRightRadius:26,
-            alignSelf:'center'
-    
-        },
+        // marginLeft:'10%',
+        // marginRight:'10%',
+        top:'-10%',
+        // backgroundColor:'#00747BCF',
+        height:'100%',
+        width:'90%',
+        borderTopLeftRadius:26,
+        borderTopRightRadius:26,
+        alignSelf:'center'
+
+    },
     Tail: {
       height:'10%',
       width: '100%',
@@ -226,10 +185,6 @@ export default MerchantCategory = ({navigation}) =>  {
       top:5,
       flexDirection:'row',
   },
-  ayurveda:{
-    marginLeft:'-40%',
-    marginTop:'10%',
-},
         
   })
 
